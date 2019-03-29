@@ -1,0 +1,35 @@
+{
+  "name": "discord-audit-log-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot that fills in the gaps in Discord's Audit Log.",
+  "keywords": [
+    "discord",
+    "bot",
+    "discord-bot",
+    "audit",
+    "log"
+  ],
+  "homepage": "https://github.com/peterthehan/discord-audit-log-bot",
+  "bugs": {
+    "url": "https://github.com/peterthehan/discord-audit-log-bot/issues",
+    "email": "peter.han.9493@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Peter Han",
+    "email": "peter.han.9493@gmail.com",
+    "url": "https://github.com/peterthehan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterthehan/discord-audit-log-bot.git"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "prod": "set NODE_ENV=production&&npm start",
+    "dev": "set NODE_ENV=development&&npm start"
+  },
+  "dependencies": {
+    "discord.js": "git://github.com/discordjs/discord.js.git#master"
+  }
+}
