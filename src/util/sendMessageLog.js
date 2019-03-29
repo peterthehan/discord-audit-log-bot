@@ -11,6 +11,6 @@ module.exports = (message, color, content, action) => {
     message.author,
     color,
     `${message.channel} | ${message.author}\n${content}`,
-    `Message ${action} after ${getElapsedTime(message.createdTimestamp)}`
+    `Message ${action} after ${getElapsedTime(message.createdTimestamp)}s`
   );
 };
