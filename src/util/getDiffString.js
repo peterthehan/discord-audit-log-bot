@@ -1,7 +1,12 @@
 const jsdiff = require('diff');
+const applyStyle = require('./applyStyle');
 
 module.exports = (oldMessage, newMessage) => {
-  if (`${oldMessage.content}${newMessage.content}`.includes('~~')) {
+  if (
+    ['~~', '*'].some(style =>
+      `${oldMessage.content}${newMessage.content}`.includes(style)
+    )
+  ) {
     return `Old: ${oldMessage.content}\nNew: [${newMessage.content}](${
       newMessage.url
     })`;
@@ -11,7 +16,10 @@ module.exports = (oldMessage, newMessage) => {
     .diffWordsWithSpace(oldMessage.content, newMessage.content)
     .reduce(
       (diffString, part) =>
-        (diffString += part.removed ? `~~${part.value}~~` : part.value),
+        (diffString += applyStyle(
+          part.value,
+          part.added ? '**' : part.removed ? '~~' : ''
+        )),
       ''
     );
 
