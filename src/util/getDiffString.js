@@ -15,5 +15,5 @@ module.exports = (oldMessage, newMessage) => {
       ''
     );
 
-  return `[${diff}](${newMessage.url})`;
+  return `${diff} [[link]](${newMessage.url})`;
 };
