@@ -16,7 +16,7 @@ module.exports = (oldUser, newUser) => {
       guild,
       newUser,
       editColor,
-      `${newUser}\nOld: ${oldUser.tag}\nNew: ${newUser.tag}`,
+      `${newUser}\n${oldUser.tag} ➡️ ${newUser.tag}`,
       'Username changed'
     );
   }
