@@ -1,4 +1,5 @@
 const { editColor } = require('../config');
+const getDiffString = require('../util/getDiffString');
 const sendMessageLog = require('../util/sendMessageLog');
 
 module.exports = (oldMessage, newMessage) => {
@@ -9,9 +10,7 @@ module.exports = (oldMessage, newMessage) => {
   sendMessageLog(
     oldMessage,
     editColor,
-    `Old: ${oldMessage.content}\nNew: [${newMessage.content}](${
-      newMessage.url
-    })`,
+    getDiffString(oldMessage, newMessage),
     'edited'
   );
 };

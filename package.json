@@ -30,6 +30,7 @@
     "dev": "set NODE_ENV=development&&npm start"
   },
   "dependencies": {
+    "diff": "^4.0.1",
     "discord.js": "git://github.com/discordjs/discord.js.git#master"
   }
 }
