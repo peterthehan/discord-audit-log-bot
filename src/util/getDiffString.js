@@ -7,7 +7,7 @@ module.exports = (oldMessage, newMessage) => {
     .reduce((diffString, part) => {
       const startsWithSpace = part.value.startsWith(' ');
       const endsWithSpace = part.value.endsWith(' ');
-      part.value = part.value.trim().replace(/[*|~~]/g, '');
+      part.value = part.value.trim().replace(/\*|~~/g, '');
 
       if (startsWithSpace) diffString += ' ';
       diffString += applyStyle(
