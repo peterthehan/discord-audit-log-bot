@@ -20,14 +20,15 @@
     "email": "peter.han.9493@gmail.com",
     "url": "https://github.com/peterthehan"
   },
+  "bin": {
+    "audit-log": "./src/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/peterthehan/discord-audit-log-bot.git"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "prod": "set NODE_ENV=production&&npm start",
-    "dev": "set NODE_ENV=development&&npm start"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "diff": "^4.0.1",
