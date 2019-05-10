@@ -38,4 +38,4 @@ guildChannelMap: {
 }
 ```
 
-> Message deletions that occur in less than the `deleteTimeThreshold` (in seconds) will not be logged.
+> Message deletions that occur in less time than the `deleteTimeThreshold` (in seconds) will not be logged.
