@@ -2,25 +2,40 @@
 
 A Discord bot that fills in the gaps in Discord's Audit Log.
 
-This bot tracks the following events:
-- When the user leaves the server
-- When the user updates their username
-  - Shows the old and new username
-- When the user deletes their message
-  - Shows the deleted message
-- When the user edits their message
-  - Shows the old and new message
+This bot logs: message edits, message deletions, username changes, and when a member leaves.
 
-## Set up Bot
+<div align="center">
+  <img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageEdit.png" />
+</div>
 
-1. Follow instructions at [create-discord-bot](https://github.com/peterthehan/create-discord-bot).
-2. Find [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js), open the file, and add:
+<div align="center">
+  <img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageDelete.png" />
+</div>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/usernameChange.png" />
+</div>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/memberLeave.png" />
+</div>
+
+## Setup
+
+1. Adapt and follow the steps found in [create-discord-bot](https://github.com/peterthehan/create-discord-bot).
+
+2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) and add your own :
 
 ```js
+editColor: 15105570,
+deleteColor: 15277667,
+deleteTimeThreshold: 1,
 guildChannelMap: {
-  'GUILD_ID_1_HERE': 'TEXT_CHANNEL_ID_1_HERE',
-  'GUILD_ID_2_HERE': 'TEXT_CHANNEL_ID_2_HERE',
-  'GUILD_ID_3_HERE': 'TEXT_CHANNEL_ID_3_HERE',
-  ...
+  'GUILD_1_ID_1': 'TEXT_CHANNEL_1_ID',
+  'GUILD_2_ID_2': 'TEXT_CHANNEL_2_ID',
+  'GUILD_3_ID_3': 'TEXT_CHANNEL_3_ID',
+  // ...Add as many guild-channel mappings as you want.
 }
 ```
+
+> Message deletions that occur in less than the `deleteTimeThreshold` (in seconds) will not be logged.
