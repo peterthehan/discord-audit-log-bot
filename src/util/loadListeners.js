@@ -6,5 +6,6 @@ module.exports = client => {
   client.on('messageDelete', handler('messageDelete'));
   client.on('messageUpdate', handler('messageUpdate'));
   client.on('userUpdate', handler('userUpdate'));
+  client.on('voiceStateUpdate', handler('voiceStateUpdate'));
   process.on('unhandledRejection', console.warn);
 };
