@@ -2,7 +2,7 @@
 
 A Discord bot that fills in the gaps in Discord's Audit Log.
 
-This bot logs: message edits, message deletions, username changes, and when a member leaves.
+This bot logs: message edits and deletions, username changes, when a member joins, changes, or leaves voice, and when a member joins or leaves the server.
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageEdit.png" />
@@ -27,6 +27,7 @@ This bot logs: message edits, message deletions, username changes, and when a me
 2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) to configure your own settings:
 
 ```js
+addColor: 3066993,
 editColor: 15105570,
 deleteColor: 15277667,
 deleteTimeThreshold: 1,
