@@ -31,9 +31,9 @@ editColor: 15105570,
 deleteColor: 15277667,
 deleteTimeThreshold: 1,
 guildChannelMap: {
-  'GUILD_1_ID_1': 'TEXT_CHANNEL_1_ID',
-  'GUILD_2_ID_2': 'TEXT_CHANNEL_2_ID',
-  'GUILD_3_ID_3': 'TEXT_CHANNEL_3_ID',
+  'GUILD_1_ID': 'TEXT_CHANNEL_1_ID',
+  'GUILD_2_ID': 'TEXT_CHANNEL_2_ID',
+  'GUILD_3_ID': 'TEXT_CHANNEL_3_ID',
   // ...Add as many guild-channel mappings as you want.
 }
 ```
