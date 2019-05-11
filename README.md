@@ -24,7 +24,7 @@ This bot logs: message edits, message deletions, username changes, and when a me
 
 1. Adapt and follow the steps found in [create-discord-bot](https://github.com/peterthehan/create-discord-bot).
 
-2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) and configure your own settings:
+2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) to configure your own settings:
 
 ```js
 editColor: 15105570,
