@@ -8,7 +8,7 @@ module.exports = (oldMessage, newMessage) => {
   }
 
   sendMessageLog(
-    oldMessage,
+    newMessage,
     editColor,
     getDiffString(oldMessage, newMessage),
     'edited'
