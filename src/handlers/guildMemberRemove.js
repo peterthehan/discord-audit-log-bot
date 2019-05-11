@@ -3,8 +3,7 @@ const sendLog = require('../util/sendLog');
 
 module.exports = guildMember =>
   sendLog(
-    guildMember.guild,
-    guildMember.user,
+    guildMember,
     deleteColor,
     `${guildMember.user}`,
     `${guildMember.user.tag} left`

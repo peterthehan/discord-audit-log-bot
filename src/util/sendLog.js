@@ -1,6 +1,6 @@
 const getAuditLogChannel = require('./getAuditLogChannel');
 
-module.exports = async (guild, user, color, description, text) => {
+module.exports = async ({ guild, user }, color, description, text) => {
   const auditLogChannel = await getAuditLogChannel(guild);
   if (!auditLogChannel) {
     return;

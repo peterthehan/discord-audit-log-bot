@@ -7,8 +7,7 @@ module.exports = (message, color, content, action) => {
   }
 
   sendLog(
-    message.guild,
-    message.author,
+    { guild: message.guild, user: message.author },
     color,
     `${message.author} | ${message.channel}\n${content}`,
     `Message ${action} after ${getElapsedTime(message.createdTimestamp)}s`
