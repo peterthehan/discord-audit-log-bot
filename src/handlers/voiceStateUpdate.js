@@ -6,6 +6,7 @@ module.exports = (oldState, newState) => {
     oldState.channel && newState.channel
       ? 'null'
       : Boolean(newState.channel).toString();
+  if (key === 'null' && oldState.channel.id === newState.channel.id) return;
 
   const state = {
     null: {
@@ -24,6 +25,7 @@ module.exports = (oldState, newState) => {
       text: 'Left'
     }
   };
+  if (!(key in state)) return;
 
   const { color, description, text } = state[key];
 
