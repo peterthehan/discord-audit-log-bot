@@ -1,5 +1,7 @@
 module.exports = date =>
   date
-    .toISOString()
-    .replace('T', ' @ ')
-    .replace(/\.\d+Z$/, '');
+    ? date
+        .toISOString()
+        .replace('T', ' @ ')
+        .replace(/\.\d+Z$/, '')
+    : 'Date not found!';
