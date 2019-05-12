@@ -1,5 +1,5 @@
 module.exports = date =>
   date
     .toISOString()
-    .replace('T', ' ')
-    .replace('Z', '');
+    .replace('T', ' @ ')
+    .replace(/\.\d+Z$/, '');
