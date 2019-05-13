@@ -6,8 +6,6 @@ module.exports = guildMember =>
   sendLog(
     guildMember,
     deleteColor,
-    `${guildMember.user}\nJoined server: ${toCleanISOString(
-      guildMember.joinedAt
-    )}`,
+    `\nJoined server: ${toCleanISOString(guildMember.joinedAt)}`,
     `${guildMember.user.tag} left`
   );

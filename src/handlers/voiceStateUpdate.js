@@ -29,10 +29,5 @@ module.exports = (oldState, newState) => {
 
   const { color, description, text } = state[key];
 
-  sendLog(
-    newState.member,
-    color,
-    `${newState.member.user}\n${description}`,
-    `${text} voice`
-  );
+  sendLog(newState.member, color, `\n${description}`, `${text} voice`);
 };

@@ -15,7 +15,7 @@ module.exports = (oldUser, newUser) => {
     sendLog(
       { guild, user: newUser },
       editColor,
-      `${newUser}\n${oldUser.tag} ➡️ ${newUser.tag}`,
+      `\n${oldUser.tag} ➡️ ${newUser.tag}`,
       'Username changed'
     );
   }
