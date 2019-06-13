@@ -2,6 +2,7 @@ const { deleteColor, deleteTimeThreshold } = require('../config');
 const getDescription = require('../util/getDescription');
 const getElapsedTime = require('../util/getElapsedTime');
 const getFooter = require('../util/getFooter');
+const getImage = require('../util/getImage');
 const sendLog = require('../util/sendLog');
 
 module.exports = message => {
@@ -10,6 +11,7 @@ module.exports = message => {
 
   sendLog(message.guild, {
     color: deleteColor,
+    ...getImage(message),
     ...getDescription(
       `${message.author} | ${message.channel}`,
       message.content

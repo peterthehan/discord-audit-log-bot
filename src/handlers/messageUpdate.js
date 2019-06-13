@@ -3,6 +3,7 @@ const getDescription = require('../util/getDescription');
 const getDiffString = require('../util/getDiffString');
 const getElapsedTime = require('../util/getElapsedTime');
 const getFooter = require('../util/getFooter');
+const getImage = require('../util/getImage');
 const sendLog = require('../util/sendLog');
 
 module.exports = (oldMessage, newMessage) => {
@@ -11,6 +12,7 @@ module.exports = (oldMessage, newMessage) => {
 
   sendLog(newMessage.guild, {
     color: editColor,
+    ...getImage(newMessage),
     ...getDescription(
       `${newMessage.author} | ${newMessage.channel}`,
       getDiffString(oldMessage, newMessage)
