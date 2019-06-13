@@ -1,4 +1,6 @@
 const { editColor, guildChannelMap } = require('../config');
+const getDescription = require('../util/getDescription');
+const getFooter = require('../util/getFooter');
 const sendLog = require('../util/sendLog');
 
 module.exports = (oldUser, newUser) => {
@@ -12,11 +14,10 @@ module.exports = (oldUser, newUser) => {
       continue;
     }
 
-    sendLog(
-      { guild, user: newUser },
-      editColor,
-      `\n${oldUser.tag} ➡️ ${newUser.tag}`,
-      'Username changed'
-    );
+    sendLog(guild, {
+      color: editColor,
+      ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
+      ...getFooter(newUser, 'Username changed')
+    });
   }
 };

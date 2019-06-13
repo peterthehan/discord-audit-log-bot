@@ -1,4 +1,6 @@
 const { addColor, editColor, deleteColor } = require('../config');
+const getDescription = require('../util/getDescription');
+const getFooter = require('../util/getFooter');
 const sendLog = require('../util/sendLog');
 
 module.exports = (oldState, newState) => {
@@ -29,5 +31,9 @@ module.exports = (oldState, newState) => {
 
   const { color, description, text } = state[key];
 
-  sendLog(newState.member, color, `\n${description}`, `${text} voice`);
+  sendLog(newState.member.guild, {
+    color,
+    ...getDescription(newState.member.user, description),
+    ...getFooter(newState.member.user, `${text} voice`)
+  });
 };
