@@ -19,6 +19,7 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 addColor: 3066993,
 editColor: 15105570,
 deleteColor: 15277667,
+deviceMap: { web: '🌐', mobile: '📱', desktop: '💻' },
 deleteTimeThreshold: 1,
 guildChannelMap: {
   'GUILD_1_ID': 'TEXT_CHANNEL_1_ID',
@@ -27,5 +28,7 @@ guildChannelMap: {
   // ...Add as many guild-channel mappings as you want.
 }
 ```
+
+> Using `deviceMap`, log message footers will indicate the client the user is connecting from.
 
 > Message deletions that occur in less time than the `deleteTimeThreshold` (in seconds) will not be logged.
