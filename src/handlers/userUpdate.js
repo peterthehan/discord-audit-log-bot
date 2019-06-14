@@ -4,9 +4,12 @@ const getFooter = require('../util/getFooter');
 const sendLog = require('../util/sendLog');
 
 module.exports = (oldUser, newUser) => {
-  if (oldUser.bot || newUser.bot || oldUser.tag === newUser.tag) {
-    return;
-  }
+  if (oldUser.bot || newUser.bot) return;
+
+  const isSameTag = oldUser.tag === newUser.tag;
+  const isSameDisplayAvatarURL =
+    oldUser.displayAvatarURL() === newUser.displayAvatarURL();
+  if (isSameTag && isSameDisplayAvatarURL) return;
 
   for (const guildId of Object.keys(guildChannelMap)) {
     const guild = newUser.client.guilds.resolve(guildId);
@@ -14,9 +17,19 @@ module.exports = (oldUser, newUser) => {
       continue;
     }
 
-    sendLog(guild, editColor, {
-      ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
-      ...getFooter(newUser, 'Username changed')
-    });
+    if (!isSameTag) {
+      sendLog(guild, editColor, {
+        ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
+        ...getFooter(newUser, 'Username changed')
+      });
+    }
+
+    if (!isSameDisplayAvatarURL) {
+      sendLog(guild, editColor, {
+        image: { url: oldUser.displayAvatarURL() },
+        ...getDescription(newUser, 'Old avatar:'),
+        ...getFooter(newUser, 'Avatar changed')
+      });
+    }
   }
 };
