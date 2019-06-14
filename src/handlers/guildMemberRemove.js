@@ -5,8 +5,7 @@ const sendLog = require('../util/sendLog');
 const toCleanISOString = require('../util/toCleanISOString');
 
 module.exports = guildMember =>
-  sendLog(guildMember.guild, {
-    color: deleteColor,
+  sendLog(guildMember.guild, deleteColor, {
     ...getDescription(
       guildMember.user,
       `Joined server: ${toCleanISOString(guildMember.joinedAt)}`

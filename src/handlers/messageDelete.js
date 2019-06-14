@@ -9,8 +9,7 @@ module.exports = message => {
   if (message.author.bot) return;
   if (getElapsedTime(message.createdTimestamp) < deleteTimeThreshold) return;
 
-  sendLog(message.guild, {
-    color: deleteColor,
+  sendLog(message.guild, deleteColor, {
     ...getImage(message),
     ...getDescription(
       `${message.author} | ${message.channel}`,

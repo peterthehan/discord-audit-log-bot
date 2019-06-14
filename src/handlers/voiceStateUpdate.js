@@ -31,8 +31,7 @@ module.exports = (oldState, newState) => {
 
   const { color, description, text } = state[key];
 
-  sendLog(newState.member.guild, {
-    color,
+  sendLog(newState.member.guild, color, {
     ...getDescription(newState.member.user, description),
     ...getFooter(newState.member.user, `${text} voice`)
   });

@@ -14,8 +14,7 @@ module.exports = (oldUser, newUser) => {
       continue;
     }
 
-    sendLog(guild, {
-      color: editColor,
+    sendLog(guild, editColor, {
       ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
       ...getFooter(newUser, 'Username changed')
     });

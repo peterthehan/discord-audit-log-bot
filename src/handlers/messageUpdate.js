@@ -10,8 +10,7 @@ module.exports = (oldMessage, newMessage) => {
   if (newMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
 
-  sendLog(newMessage.guild, {
-    color: editColor,
+  sendLog(newMessage.guild, editColor, {
     ...getImage(newMessage),
     ...getDescription(
       `${newMessage.author} | ${newMessage.channel}`,
