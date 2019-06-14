@@ -7,7 +7,9 @@ const sendLog = require('../util/sendLog');
 
 module.exports = message => {
   if (message.author.bot) return;
-  if (getElapsedTime(message.createdTimestamp) < deleteTimeThreshold) return;
+
+  const elapsedTime = getElapsedTime(message.createdTimestamp);
+  if (elapsedTime < deleteTimeThreshold) return;
 
   sendLog(message.guild, deleteColor, {
     ...getImage(message),
@@ -15,9 +17,6 @@ module.exports = message => {
       `${message.author} | ${message.channel}`,
       message.content
     ),
-    ...getFooter(
-      message.author,
-      `Message deleted after ${getElapsedTime(message.createdTimestamp)}s`
-    )
+    ...getFooter(message.author, `Message deleted after ${elapsedTime}s`)
   });
 };
