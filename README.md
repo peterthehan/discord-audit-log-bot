@@ -11,7 +11,7 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceChange.png"> Voice change|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceLeave.png"> Voice leave|
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/avatarChange.png"> Avatar change||
 
-The user's client is indicated in the footer as:
+The user's active clients are indicated in the footer as:
 - 🌐: web
 - 📱: mobile
 - 💻: desktop
