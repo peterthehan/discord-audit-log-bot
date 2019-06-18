@@ -1,4 +1,4 @@
-const { deviceMap } = require('../config');
+const { clientMap } = require('../config');
 
 module.exports = (user, text) => {
   const devices = user.presence.clientStatus
@@ -6,7 +6,7 @@ module.exports = (user, text) => {
     : [];
 
   const footerText = devices.length
-    ? `${text} | ${devices.map(device => deviceMap[device]).join('')}`
+    ? `${text} | ${devices.map(device => clientMap[device]).join('')}`
     : text;
 
   return { footer: { icon_url: user.displayAvatarURL(), text: footerText } };

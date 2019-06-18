@@ -1,4 +1,4 @@
-const { editColor } = require('../config');
+const { neutralColor } = require('../config');
 const getDescription = require('../util/getDescription');
 const getDiffString = require('../util/getDiffString');
 const getElapsedTime = require('../util/getElapsedTime');
@@ -10,7 +10,7 @@ module.exports = (oldMessage, newMessage) => {
   if (newMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
 
-  sendLog(newMessage.guild, editColor, {
+  sendLog(newMessage.guild, neutralColor, {
     ...getImage(newMessage),
     ...getDescription(
       `${newMessage.author} | ${newMessage.channel}`,

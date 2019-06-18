@@ -1,4 +1,4 @@
-const { addColor, editColor, deleteColor } = require('../config');
+const { positiveColor, neutralColor, negativeColor } = require('../config');
 const getDescription = require('../util/getDescription');
 const getFooter = require('../util/getFooter');
 const sendLog = require('../util/sendLog');
@@ -12,17 +12,17 @@ module.exports = (oldState, newState) => {
 
   const state = {
     null: {
-      color: editColor,
+      color: neutralColor,
       description: `${oldState.channel} ➡️ ${newState.channel}`,
       text: 'Changed'
     },
     true: {
-      color: addColor,
+      color: positiveColor,
       description: `${newState.channel}`,
       text: 'Joined'
     },
     false: {
-      color: deleteColor,
+      color: negativeColor,
       description: `${oldState.channel}`,
       text: 'Left'
     }

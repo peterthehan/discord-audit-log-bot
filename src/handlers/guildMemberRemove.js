@@ -1,11 +1,11 @@
-const { deleteColor } = require('../config');
+const { negativeColor } = require('../config');
 const getDescription = require('../util/getDescription');
 const getFooter = require('../util/getFooter');
 const sendLog = require('../util/sendLog');
 const toCleanISOString = require('../util/toCleanISOString');
 
 module.exports = guildMember =>
-  sendLog(guildMember.guild, deleteColor, {
+  sendLog(guildMember.guild, negativeColor, {
     ...getDescription(
       guildMember.user,
       `Joined server: ${toCleanISOString(guildMember.joinedAt)}`

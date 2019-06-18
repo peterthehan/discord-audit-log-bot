@@ -1,4 +1,4 @@
-const { editColor, guildChannelMap } = require('../config');
+const { neutralColor, guildChannelMap } = require('../config');
 const getDescription = require('../util/getDescription');
 const getFooter = require('../util/getFooter');
 const sendLog = require('../util/sendLog');
@@ -18,14 +18,14 @@ module.exports = (oldUser, newUser) => {
     }
 
     if (!isSameTag) {
-      sendLog(guild, editColor, {
+      sendLog(guild, neutralColor, {
         ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
         ...getFooter(newUser, 'Username changed')
       });
     }
 
     if (!isSameDisplayAvatarURL) {
-      sendLog(guild, editColor, {
+      sendLog(guild, neutralColor, {
         image: { url: oldUser.displayAvatarURL() },
         ...getDescription(newUser, 'Old avatar:'),
         ...getFooter(newUser, 'Avatar changed')
