@@ -39,3 +39,9 @@ guildChannelMap: {
 > `deviceMap` labels the client the user is connecting from.
 
 > Message deletions that occur in less time than the `deleteTimeThreshold` (in seconds) will not be logged.
+
+Visit for more help or information!
+
+<a href="https://discord.gg/WjEFnzC">
+  <img src="https://discordapp.com/api/guilds/258167954913361930/embed.png?style=banner2" title="Discord Server"/>
+</a>
