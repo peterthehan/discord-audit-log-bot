@@ -7,9 +7,11 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageEdit.png"> Message edit|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageDelete.png"> Message delete|
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageEditWithImage.png"> Message edit with image|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/messageDeleteWithImage.png"> Message delete with image|
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/memberJoin.png"> Member join|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/memberLeave.png"> Member leave|
-|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/usernameChange.png"> Username change|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceJoin.png"> Voice join|
-|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceChange.png"> Voice change|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceLeave.png"> Voice leave|
-|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/avatarChange.png"> Avatar change||
+|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceJoin.png"> Voice join|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceChange.png"> Voice change|
+|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/voiceLeave.png"> Voice leave|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/streamStart.png"> Stream start|
+|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/streamChange.png"> Stream change|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/streamStop.png"> Stream stop|
+|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/listeningStart.png"> Listening start|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/listeningStop.png"> Listening stop|
+|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/avatarChange.png"> Avatar change|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/usernameChange.png"> Username change|
 
 The user's active clients are indicated in the footer as:
 - 🌐: web
