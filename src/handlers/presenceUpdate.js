@@ -23,7 +23,7 @@ module.exports = (oldPresence, newPresence) => {
   const newActivity = newPresence.activity;
   if (isSameActivity(oldActivity, newActivity)) return;
 
-  const type = ['LISTENING', 'STREAMING'].find(type =>
+  const type = ['STREAMING'].find(type =>
     isLoggedActivity(oldActivity, newActivity, type)
   );
   if (!type) return;
