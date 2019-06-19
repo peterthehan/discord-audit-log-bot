@@ -17,6 +17,6 @@ module.exports = message => {
       `${message.author} | ${message.channel}`,
       message.content
     ),
-    ...getFooter(message.author, `Message deleted after ${elapsedTime}s`)
+    ...getFooter(message.author, `Deleted message after ${elapsedTime}s`)
   });
 };

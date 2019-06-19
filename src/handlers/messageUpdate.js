@@ -18,7 +18,7 @@ module.exports = (oldMessage, newMessage) => {
     ),
     ...getFooter(
       newMessage.author,
-      `Message edited after ${getElapsedTime(newMessage.createdTimestamp)}s`
+      `Edited message after ${getElapsedTime(newMessage.createdTimestamp)}s`
     )
   });
 };

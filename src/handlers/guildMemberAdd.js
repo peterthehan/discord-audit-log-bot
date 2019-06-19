@@ -10,5 +10,5 @@ module.exports = guildMember =>
       guildMember.user,
       `Account created: ${toCleanISOString(guildMember.user.createdAt)}`
     ),
-    ...getFooter(guildMember.user, `${guildMember.user.tag} joined`)
+    ...getFooter(guildMember.user, `${guildMember.user.tag} joined the server`)
   });

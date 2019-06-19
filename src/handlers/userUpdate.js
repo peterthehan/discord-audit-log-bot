@@ -20,7 +20,7 @@ module.exports = (oldUser, newUser) => {
     if (!isSameTag) {
       sendLog(guild, neutralColor, {
         ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
-        ...getFooter(newUser, 'Username changed')
+        ...getFooter(newUser, 'Changed username')
       });
     }
 
@@ -28,7 +28,7 @@ module.exports = (oldUser, newUser) => {
       sendLog(guild, neutralColor, {
         image: { url: oldUser.displayAvatarURL() },
         ...getDescription(newUser, 'Old avatar:'),
-        ...getFooter(newUser, 'Avatar changed')
+        ...getFooter(newUser, 'Changed avatar')
       });
     }
   }
