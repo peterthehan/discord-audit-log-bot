@@ -40,7 +40,7 @@ guildChannelMap: {
 }
 ```
 
-> `deviceMap` labels the client the user is connecting from.
+> `clientMap` labels the client the user is connecting from.
 
 > Message deletions that occur in less time than the `deleteTimeThreshold` (in seconds) will not be logged.
 
