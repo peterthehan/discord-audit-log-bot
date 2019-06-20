@@ -39,7 +39,7 @@ module.exports = (oldPresence, newPresence) => {
   if (!map) return;
 
   const user = [oldPresence, newPresence].filter(Boolean)[0].user;
-  return sendLog(guild, map.color, {
+  sendLog(guild, map.color, {
     ...getDescription(user, map.content),
     ...getFooter(user, map.state.footerText)
   });
