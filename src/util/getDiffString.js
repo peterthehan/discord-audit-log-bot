@@ -2,19 +2,17 @@ const jsdiff = require('diff');
 const applyStyle = require('./applyStyle');
 
 module.exports = (oldMessage, newMessage) => {
+  const markdownRegExp = /\*|~~/g;
   const diff = jsdiff
-    .diffWordsWithSpace(oldMessage.content, newMessage.content)
+    .diffWordsWithSpace(
+      oldMessage.content.replace(markdownRegExp, ''),
+      newMessage.content.replace(markdownRegExp, '')
+    )
     .reduce((diffString, part) => {
-      const startsWithSpace = part.value.startsWith(' ');
-      const endsWithSpace = part.value.endsWith(' ');
-      part.value = part.value.trim().replace(/\*|~~/g, '');
-
-      if (startsWithSpace) diffString += ' ';
       diffString += applyStyle(
         part.value,
         part.added ? '***' : part.removed ? '~~' : ''
       );
-      if (endsWithSpace) diffString += ' ';
 
       return diffString;
     }, '');
