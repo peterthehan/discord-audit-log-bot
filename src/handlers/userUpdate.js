@@ -13,9 +13,7 @@ module.exports = (oldUser, newUser) => {
 
   for (const guildId of Object.keys(guildChannelMap)) {
     const guild = newUser.client.guilds.resolve(guildId);
-    if (!guild.members.resolve(newUser.id)) {
-      continue;
-    }
+    if (!guild.members.resolve(newUser.id)) continue;
 
     if (!isSameTag) {
       sendLog(guild, neutralColor, {
