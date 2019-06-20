@@ -25,11 +25,12 @@ The user's active clients are indicated in the footer as:
 2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) to configure your own settings:
 
 ```js
-positiveColor: 3447003,
-neutralColor: 15105570,
-negativeColor: 15277667,
-streamingColor: 6570404,
-listeningColor: 1947988,
+blurpleColor: 0x7289da,
+positiveColor: 0x3498db,
+neutralColor: 0xe67e22,
+negativeColor: 0xe91e63,
+streamingColor: 0x6441a4,
+listeningColor: 0x1db954,
 clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
 deleteTimeThreshold: 1,
 guildChannelMap: {
