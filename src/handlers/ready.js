@@ -5,10 +5,7 @@ module.exports = client => {
   console.log(`${client.user.tag}: Ready`);
 
   for (const guildId of Object.keys(guildChannelMap)) {
-    const guild = client.guilds.resolve(guildId);
-    if (!guild) continue;
-
-    sendLog(guild, blurpleColor, {
+    sendLog(client.guilds.resolve(guildId), blurpleColor, {
       footer: { text: 'Made with ❤ by peterthehan' }
     });
   }

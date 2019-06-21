@@ -1,1 +1,1 @@
-module.exports = (string, style = '') => `${style}${string}${style}`;
+module.exports = (string, style) => `${style}${string}${style}`;

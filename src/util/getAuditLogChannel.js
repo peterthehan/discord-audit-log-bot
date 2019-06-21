@@ -8,7 +8,10 @@ module.exports = async guild => {
 
   const { client, id } = guild;
   if (!(id in auditLogChannelCache)) {
-    auditLogChannelCache[id] = await client.channels.fetch(guildChannelMap[id]);
+    const auditLogChannel = await client.channels.fetch(guildChannelMap[id]);
+    if (!auditLogChannel) return;
+
+    auditLogChannelCache[id] = auditLogChannel;
   }
 
   return auditLogChannelCache[id];
