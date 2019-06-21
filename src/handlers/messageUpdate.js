@@ -4,11 +4,16 @@ const getDiffString = require('../util/getDiffString');
 const getElapsedTime = require('../util/getElapsedTime');
 const getFooter = require('../util/getFooter');
 const getImage = require('../util/getImage');
+const humanizeTime = require('../util/humanizeTime');
 const sendLog = require('../util/sendLog');
 
 module.exports = (oldMessage, newMessage) => {
   if (newMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
+
+  const humanizedElapsedTime = humanizeTime(
+    getElapsedTime(newMessage.createdTimestamp)
+  );
 
   sendLog(newMessage.guild, neutralColor, {
     ...getImage(newMessage),
@@ -18,7 +23,7 @@ module.exports = (oldMessage, newMessage) => {
     ),
     ...getFooter(
       newMessage.author,
-      `Edited message after ${getElapsedTime(newMessage.createdTimestamp)}s`
+      `Edited message after ${humanizedElapsedTime}`
     )
   });
 };
