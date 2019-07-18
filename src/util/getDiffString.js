@@ -1,5 +1,6 @@
 const jsdiff = require('diff');
 const applyStyle = require('./applyStyle');
+const getHyperlink = require('./getHyperlink');
 
 module.exports = (oldMessage, newMessage) => {
   const markdownRegExp = /\*|~~/g;
@@ -17,5 +18,5 @@ module.exports = (oldMessage, newMessage) => {
       return diffString;
     }, '');
 
-  return `${diff} [[link]](${newMessage.url})`;
+  return `${diff} ${getHyperlink(newMessage.url)}`;
 };

@@ -3,7 +3,8 @@ const getDescription = require('../util/getDescription');
 const getDiffString = require('../util/getDiffString');
 const getElapsedTime = require('../util/getElapsedTime');
 const getFooter = require('../util/getFooter');
-const getImage = require('../util/getImage');
+const getHyperlink = require('../util/getHyperlink');
+const getImages = require('../util/getImages');
 const humanizeTime = require('../util/humanizeTime');
 const sendLog = require('../util/sendLog');
 
@@ -15,15 +16,24 @@ module.exports = (oldMessage, newMessage) => {
     getElapsedTime(newMessage.createdTimestamp)
   );
 
-  sendLog(newMessage.guild, neutralColor, {
-    ...getImage(newMessage),
-    ...getDescription(
-      `${newMessage.author} | ${newMessage.channel}`,
-      getDiffString(oldMessage, newMessage)
-    ),
-    ...getFooter(
-      newMessage.author,
-      `Edited message after ${humanizedElapsedTime}`
-    )
-  });
+  const images = getImages(newMessage);
+
+  for (let i = 0; i < images.length; ++i) {
+    const content =
+      i > 0
+        ? getHyperlink(newMessage.url)
+        : getDiffString(oldMessage, newMessage);
+
+    sendLog(newMessage.guild, neutralColor, {
+      ...images[i],
+      ...getDescription(
+        `${newMessage.author} | ${newMessage.channel}`,
+        content
+      ),
+      ...getFooter(
+        newMessage.author,
+        `Edited message after ${humanizedElapsedTime}`
+      )
+    });
+  }
 };

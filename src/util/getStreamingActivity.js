@@ -1,4 +1,5 @@
 const { streamingColor } = require('../config');
+const getHyperlink = require('./getHyperlink');
 
 module.exports = (key, activity) => {
   const streamingRegExp = /twitch/gi;
@@ -12,7 +13,9 @@ module.exports = (key, activity) => {
 
   return {
     color: streamingColor,
-    content: `${activity.details}: ${activity.name} [[link]](${activity.url})`,
+    content: `${activity.details}: ${activity.name} ${getHyperlink(
+      activity.url
+    )}`,
     state: stateMap[key]
   };
 };
