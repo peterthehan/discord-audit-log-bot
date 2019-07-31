@@ -2,10 +2,10 @@ const AuditLogEmbedBuilder = require('./AuditLogEmbedBuilder');
 
 module.exports = class VoiceFactory {
   constructor(user, oldChannel, newChannel, humanizedElapsedTimeText) {
+    this.auditLogEmbedBuilder = new AuditLogEmbedBuilder().setUser(user);
     this.oldChannel = oldChannel;
     this.newChannel = newChannel;
     this.humanizedElapsedTimeText = humanizedElapsedTimeText;
-    this.auditLogEmbedBuilder = new AuditLogEmbedBuilder().setUser(user);
   }
 
   createAuditLogEmbed(state) {
