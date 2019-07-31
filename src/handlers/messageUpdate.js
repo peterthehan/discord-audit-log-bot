@@ -6,7 +6,7 @@ const getImages = require('../util/getImages');
 const send = require('../util/send');
 
 module.exports = (oldMessage, newMessage) => {
-  if (newMessage.author.bot) return;
+  if (oldMessage.author.bot || newMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
 
   const time = new Time(newMessage.createdTimestamp);
