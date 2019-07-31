@@ -4,11 +4,14 @@ module.exports = class Time {
   }
 
   getElapsedTime() {
-    return ((Date.now() - this.date) / 1000).toFixed(1);
+    return this.date
+      ? Math.max(0, ((Date.now() - this.date) / 1000).toFixed(1))
+      : -1;
   }
 
   getHumanizedElapsedTime() {
     const seconds = this.getElapsedTime();
+    if (seconds < 0) return '?';
     if (seconds < 60) return `${seconds}s`;
 
     const units = ['h', 'm', 's'];
