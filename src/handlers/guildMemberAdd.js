@@ -1,14 +1,14 @@
-const { positiveColor } = require('../config');
-const getDescription = require('../util/getDescription');
-const getFooter = require('../util/getFooter');
-const sendLog = require('../util/sendLog');
-const toCleanISOString = require('../util/toCleanISOString');
+const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
+const Time = require('../classes/Time');
+const send = require('../util/send');
 
-module.exports = guildMember =>
-  sendLog(guildMember.guild, positiveColor, {
-    ...getDescription(
-      guildMember.user,
-      `Account created: ${toCleanISOString(guildMember.user.createdAt)}`
-    ),
-    ...getFooter(guildMember.user, `${guildMember.user.tag} joined the server`)
-  });
+module.exports = guildMember => {
+  const time = new Time(guildMember.user.createdAt);
+  const embed = new AuditLogEmbedBuilder()
+    .setColor('positiveColor')
+    .setUser(guildMember.user)
+    .setBody(`Account created: ${time.toCleanISOString()}`)
+    .setFooter(`Joined the server`);
+
+  send(guildMember.guild, embed);
+};

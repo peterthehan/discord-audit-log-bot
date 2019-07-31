@@ -1,23 +1,12 @@
+const ActivityFactory = require('../classes/ActivityFactory');
 const getActivityState = require('../util/getActivityState');
-const getDescription = require('../util/getDescription');
-const getFooter = require('../util/getFooter');
-const getListeningActivity = require('../util/getListeningActivity');
-const getStreamingActivity = require('../util/getStreamingActivity');
 const isInvalidGuild = require('../util/isInvalidGuild');
-const sendLog = require('../util/sendLog');
-
-const isSameActivity = (oldActivity, newActivity) =>
-  (!oldActivity && !newActivity) ||
-  (oldActivity && oldActivity.equals(newActivity)) ||
-  (newActivity && newActivity.equals(oldActivity));
-
-const isLoggedActivity = (oldActivity, newActivity, type) =>
-  (oldActivity && oldActivity.type === type) ||
-  (newActivity && newActivity.type === type);
+const isLoggedActivity = require('../util/isLoggedActivity');
+const isSameActivity = require('../util/isSameActivity');
+const send = require('../util/send');
 
 module.exports = (oldPresence, newPresence) => {
-  const guild = newPresence.guild;
-  if (isInvalidGuild(guild)) return;
+  if (isInvalidGuild(newPresence.guild)) return;
 
   const oldActivity = oldPresence ? oldPresence.activity : null;
   const newActivity = newPresence.activity;
@@ -28,19 +17,12 @@ module.exports = (oldPresence, newPresence) => {
   );
   if (!type) return;
 
-  const { key, activity } = getActivityState(oldActivity, newActivity, type);
-
-  let map = null;
-  if (type === 'LISTENING') {
-    map = getListeningActivity(key, activity);
-  } else if (type === 'STREAMING') {
-    map = getStreamingActivity(key, activity);
-  }
-  if (!map) return;
+  const { state, activity } = getActivityState(oldActivity, newActivity, type);
+  const embed = new ActivityFactory(state, activity).getActivity(type);
+  if (!embed) return;
 
   const user = [oldPresence, newPresence].filter(Boolean)[0].user;
-  sendLog(guild, map.color, {
-    ...getDescription(user, map.content),
-    ...getFooter(user, map.state.footerText)
-  });
+  embed.setUser(user);
+
+  send(newPresence.guild, embed);
 };

@@ -1,60 +1,47 @@
-const { positiveColor, neutralColor, negativeColor } = require('../config');
-const getDescription = require('../util/getDescription');
-const getElapsedTime = require('../util/getElapsedTime');
-const getFooter = require('../util/getFooter');
-const humanizeTime = require('../util/humanizeTime');
-const sendLog = require('../util/sendLog');
+const Time = require('../classes/Time');
+const VoiceFactory = require('../classes/VoiceFactory');
+const send = require('../util/send');
 
 const voiceCache = {};
 
-module.exports = (oldState, newState) => {
-  const key =
-    oldState.channel && newState.channel
-      ? 'null'
-      : Boolean(newState.channel).toString();
-  if (key === 'null' && oldState.channel.id === newState.channel.id) return;
+const _getStateEnum = (oldChannel, newChannel) =>
+  oldChannel && newChannel ? 'CHANGE' : Boolean(newChannel) ? 'JOIN' : 'LEAVE';
 
-  let elapsedTimeText = '';
-  if (key === 'true') {
-    voiceCache[newState.member.user.id] = Date.now();
-  } else {
-    if (newState.member.user.id in voiceCache) {
-      const humanizedElapsedTime = humanizeTime(
-        getElapsedTime(voiceCache[newState.member.user.id])
-      );
-      delete voiceCache[newState.member.user.id];
-
-      elapsedTimeText = ` after ${humanizedElapsedTime}`;
-    }
-
-    if (key === 'null') {
-      voiceCache[newState.member.user.id] = Date.now();
-    }
+const _getHumanizedElapsedTimeText = (state, userId) => {
+  if (state === 'JOIN') {
+    voiceCache[userId] = Date.now();
+    return '';
   }
 
-  const state = {
-    true: {
-      color: positiveColor,
-      description: `${newState.channel}`,
-      text: 'Joined voice'
-    },
-    false: {
-      color: negativeColor,
-      description: `${oldState.channel}`,
-      text: `Left voice${elapsedTimeText}`
-    },
-    null: {
-      color: neutralColor,
-      description: `${oldState.channel} ➡️ ${newState.channel}`,
-      text: `Changed voice${elapsedTimeText}`
-    }
-  };
-  if (!(key in state)) return;
+  let humanizedElapsedTimeText = '';
+  if (userId in voiceCache) {
+    const time = new Time(voiceCache[userId]);
+    humanizedElapsedTimeText = ` after ${time.getHumanizedElapsedTime()}`;
+    delete voiceCache[userId];
+  }
 
-  const { color, description, text } = state[key];
+  if (state === 'CHANGE') {
+    voiceCache[userId] = Date.now();
+  }
 
-  sendLog(newState.member.guild, color, {
-    ...getDescription(newState.member.user, description),
-    ...getFooter(newState.member.user, text)
-  });
+  return humanizedElapsedTimeText;
+};
+
+module.exports = (oldState, newState) => {
+  const state = _getStateEnum(oldState.channel, newState.channel);
+  if (state === 'CHANGE' && oldState.channel.id === newState.channel.id) return;
+
+  const humanizedElapsedTimeText = _getHumanizedElapsedTimeText(
+    state,
+    newState.member.user.id
+  );
+
+  const embed = new VoiceFactory(
+    newState.member.user,
+    oldState.channel,
+    newState.channel,
+    humanizedElapsedTimeText
+  ).createAuditLogEmbed(state);
+
+  send(newState.member.guild, embed);
 };

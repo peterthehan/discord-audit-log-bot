@@ -1,7 +1,6 @@
-const { neutralColor, guildChannelMap } = require('../config');
-const getDescription = require('../util/getDescription');
-const getFooter = require('../util/getFooter');
-const sendLog = require('../util/sendLog');
+const { guildChannelMap } = require('../config');
+const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
+const send = require('../util/send');
 
 module.exports = (oldUser, newUser) => {
   if (oldUser.bot || newUser.bot) return;
@@ -15,19 +14,23 @@ module.exports = (oldUser, newUser) => {
     const guild = newUser.client.guilds.resolve(guildId);
     if (!guild.members.resolve(newUser.id)) continue;
 
+    const embed = new AuditLogEmbedBuilder()
+      .setColor('neutralColor')
+      .setUser(newUser);
+
     if (!isSameTag) {
-      sendLog(guild, neutralColor, {
-        ...getDescription(newUser, `${oldUser.tag} ➡️ ${newUser.tag}`),
-        ...getFooter(newUser, 'Changed username')
-      });
+      embed
+        .setBody(`${oldUser.tag} ➡️ ${newUser.tag}`)
+        .setFooter('Changed username');
+      send(guild, embed);
     }
 
     if (!isSameDisplayAvatarURL) {
-      sendLog(guild, neutralColor, {
-        image: { url: oldUser.displayAvatarURL() },
-        ...getDescription(newUser, 'Old avatar:'),
-        ...getFooter(newUser, 'Changed avatar')
-      });
+      embed
+        .setBody('Old avatar:')
+        .setImage(oldUser.displayAvatarURL())
+        .setFooter('Changed avatar');
+      send(guild, embed);
     }
   }
 };

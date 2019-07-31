@@ -1,39 +1,27 @@
-const { neutralColor } = require('../config');
-const getDescription = require('../util/getDescription');
+const { editTimeThreshold } = require('../config');
+const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
+const Time = require('../classes/Time');
 const getDiffString = require('../util/getDiffString');
-const getElapsedTime = require('../util/getElapsedTime');
-const getFooter = require('../util/getFooter');
-const getHyperlink = require('../util/getHyperlink');
 const getImages = require('../util/getImages');
-const humanizeTime = require('../util/humanizeTime');
-const sendLog = require('../util/sendLog');
+const send = require('../util/send');
 
 module.exports = (oldMessage, newMessage) => {
   if (newMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
 
-  const humanizedElapsedTime = humanizeTime(
-    getElapsedTime(newMessage.createdTimestamp)
-  );
+  const time = new Time(newMessage.createdTimestamp);
+  if (time.getElapsedTime() < editTimeThreshold) return;
 
-  const images = getImages(newMessage);
+  getImages(newMessage).forEach((image, index) => {
+    const embed = new AuditLogEmbedBuilder()
+      .setColor('neutralColor')
+      .setUser(newMessage.author)
+      .setChannel(newMessage.channel)
+      .setBody(!index ? getDiffString(oldMessage, newMessage) : '')
+      .setLink(newMessage.url)
+      .setImage(image)
+      .setFooter(`Edited message after ${time.getHumanizedElapsedTime()}`);
 
-  for (let i = 0; i < images.length; ++i) {
-    const content =
-      i > 0
-        ? getHyperlink(newMessage.url)
-        : getDiffString(oldMessage, newMessage);
-
-    sendLog(newMessage.guild, neutralColor, {
-      ...images[i],
-      ...getDescription(
-        `${newMessage.author} | ${newMessage.channel}`,
-        content
-      ),
-      ...getFooter(
-        newMessage.author,
-        `Edited message after ${humanizedElapsedTime}`
-      )
-    });
-  }
+    send(newMessage.guild, embed);
+  });
 };
