@@ -1,12 +1,13 @@
-module.exports = message => {
-  if (!message.attachments.size) return [{}];
+const imageRegExp = /^.*\.(png|jpe?g|gif|webp)$/i;
 
-  const imageRegExp = /^.*\.(png|jpe?g|gif|webp)$/i;
+module.exports = message => {
+  if (!message.attachments.size) return [''];
+
   const images = message.attachments
     .filter(attachment => imageRegExp.test(attachment.proxyURL))
-    .map(attachment => ({ image: { url: attachment.proxyURL } }));
+    .map(attachment => attachment.proxyURL);
 
-  if (!images.length) images.push({});
+  if (!images.length) images.push('');
 
   return images;
 };

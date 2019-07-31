@@ -1,10 +1,11 @@
 const jsdiff = require('diff');
-const applyStyle = require('./applyStyle');
-const getHyperlink = require('./getHyperlink');
 
-module.exports = (oldMessage, newMessage) => {
-  const markdownRegExp = /\*|~~/g;
-  const diff = jsdiff
+const markdownRegExp = /\*|~~/g;
+
+const applyStyle = (string, style) => `${style}${string}${style}`;
+
+module.exports = (oldMessage, newMessage) =>
+  jsdiff
     .diffWordsWithSpace(
       oldMessage.content.replace(markdownRegExp, ''),
       newMessage.content.replace(markdownRegExp, '')
@@ -17,6 +18,3 @@ module.exports = (oldMessage, newMessage) => {
 
       return diffString;
     }, '');
-
-  return `${diff} ${getHyperlink(newMessage.url)}`;
-};
