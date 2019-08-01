@@ -27,6 +27,6 @@ module.exports = class VoiceFactory {
           .setFooter(`Changed voice${this.humanizedElapsedTimeText}`);
     }
 
-    return this.auditLogEmbedBuilder;
+    return null;
   }
 };

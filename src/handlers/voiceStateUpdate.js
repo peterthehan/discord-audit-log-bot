@@ -45,6 +45,7 @@ module.exports = (oldState, newState) => {
     newState.channel,
     humanizedElapsedTimeText
   ).createAuditLogEmbed(state);
+  if (!embed) return;
 
   send(newState.member.guild, embed);
 };
