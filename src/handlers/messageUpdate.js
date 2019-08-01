@@ -1,7 +1,7 @@
 const { editTimeThreshold } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const Time = require('../classes/Time');
-const getDiffString = require('../util/getDiffString');
+const getDiff = require('../util/getDiff');
 const getImages = require('../util/getImages');
 const isLoggedGuild = require('../util/isLoggedGuild');
 const send = require('../util/send');
@@ -19,7 +19,7 @@ module.exports = (oldMessage, newMessage) => {
       .setColor('neutralColor')
       .setUser(newMessage.author)
       .setChannel(newMessage.channel)
-      .setBody(!index ? getDiffString(oldMessage, newMessage) : '')
+      .setBody(!index ? getDiff(oldMessage.content, newMessage.content) : '')
       .setLink(newMessage.url)
       .setImage(image)
       .setFooter(`Edited message after ${time.getHumanizedElapsedTime()}`);

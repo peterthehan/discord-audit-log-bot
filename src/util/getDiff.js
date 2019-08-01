@@ -4,11 +4,11 @@ const markdownRegExp = /\*|~~/g;
 
 const _applyStyle = (string, style) => `${style}${string}${style}`;
 
-module.exports = (oldMessage, newMessage) =>
+module.exports = (oldString, newString) =>
   jsdiff
     .diffWordsWithSpace(
-      oldMessage.content.replace(markdownRegExp, ''),
-      newMessage.content.replace(markdownRegExp, '')
+      oldString.replace(markdownRegExp, ''),
+      newString.replace(markdownRegExp, '')
     )
     .reduce((diffString, part) => {
       diffString += _applyStyle(
