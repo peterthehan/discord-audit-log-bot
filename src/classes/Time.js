@@ -4,9 +4,9 @@ module.exports = class Time {
   }
 
   getElapsedTime() {
-    return this.date
-      ? Math.max(0, ((Date.now() - this.date) / 1000).toFixed(1))
-      : -1;
+    if (!this.date) return -1;
+    const elapsedTime = ((Date.now() - this.date) / 1000).toFixed(1);
+    return elapsedTime < 0 ? 0 : elapsedTime;
   }
 
   getHumanizedElapsedTime() {
