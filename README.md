@@ -13,11 +13,6 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/listeningStart.png"> Listening start|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/listeningStop.png"> Listening stop|
 |<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/avatarChange.png"> Avatar change|<img src="https://raw.githubusercontent.com/peterthehan/discord-audit-log-bot/master/assets/usernameChange.png"> Username change|
 
-The user's active clients are indicated in the footer as:
-- 🌐: web
-- 📱: mobile
-- 💻: desktop
-
 ## Setup
 
 1. Adapt and follow the steps found in [create-discord-bot](https://github.com/peterthehan/create-discord-bot).
@@ -44,7 +39,7 @@ guildChannelMap: {
 }
 ```
 
-> `clientMap` denotes the client the user is connecting from.
+> `clientMap` denotes the active clients the user is connecting from. This displays in the embed's footer.
 
 > Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
 
