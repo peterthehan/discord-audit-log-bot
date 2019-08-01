@@ -2,9 +2,11 @@ const { deleteTimeThreshold } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const Time = require('../classes/Time');
 const getImages = require('../util/getImages');
+const isLoggedGuild = require('../util/isLoggedGuild');
 const send = require('../util/send');
 
 module.exports = message => {
+  if (!isLoggedGuild(message.guild)) return;
   if (message.author.bot) return;
 
   const time = new Time(message.createdTimestamp);
