@@ -3,13 +3,15 @@ const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const send = require('../util/send');
 
 module.exports = client => {
-  Object.keys(guildChannelMap).forEach(guildId => {
+  console.log(`${client.user.tag}: Ready`);
+  for (const guildId of Object.keys(guildChannelMap)) {
+    const guild = client.guilds.resolve(guildId);
+    if (!guild) continue;
+
     const embed = new AuditLogEmbedBuilder()
       .setColor('blurpleColor')
       .setFooter('Made with ❤ by peterthehan');
 
-    send(client.guilds.resolve(guildId), embed);
-  });
-
-  console.log(`${client.user.tag}: Ready`);
+    send(guild, embed);
+  }
 };
