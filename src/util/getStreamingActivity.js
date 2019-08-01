@@ -11,11 +11,11 @@ module.exports = (state, activity) => {
     .setLink(activity.url);
 
   switch (state) {
-    case 'true':
+    case 'START':
       return embed.setFooter('Started stream');
-    case 'false':
+    case 'STOP':
       return embed.setFooter('Stopped stream');
-    case 'null':
+    case 'CHANGE':
       return embed.setFooter('Changed stream');
   }
 

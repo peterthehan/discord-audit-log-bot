@@ -10,11 +10,11 @@ module.exports = (state, activity) => {
     .setBody(activity.name);
 
   switch (state) {
-    case 'true':
+    case 'START':
       return embed.setFooter('Started listening');
-    case 'false':
+    case 'STOP':
       return embed.setFooter('Stopped listening');
-    case 'null':
+    case 'CHANGE':
       return embed.setFooter('Changed listening');
   }
 

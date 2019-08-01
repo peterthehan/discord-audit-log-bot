@@ -19,7 +19,7 @@ const _getActivityState = (oldActivity, newActivity, type) => {
     newActivity.type === type
   ) {
     return {
-      state: 'true',
+      state: 'START',
       activity: newActivity
     };
   } else if (
@@ -27,13 +27,13 @@ const _getActivityState = (oldActivity, newActivity, type) => {
     oldActivity.type === type
   ) {
     return {
-      state: 'false',
+      state: 'STOP',
       activity: oldActivity
     };
   }
 
   return {
-    state: 'null',
+    state: 'CHANGE',
     activity: newActivity
   };
 };
