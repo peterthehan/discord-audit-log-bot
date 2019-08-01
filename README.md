@@ -25,14 +25,17 @@ The user's active clients are indicated in the footer as:
 2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) to configure your own settings:
 
 ```js
-blurpleColor: 0x7289da,
-positiveColor: 0x3498db,
-neutralColor: 0xe67e22,
-negativeColor: 0xe91e63,
-streamingColor: 0x6441a4,
-listeningColor: 0x1db954,
 clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
+colors: {
+  blurpleColor: 0x7289da,
+  positiveColor: 0x3498db,
+  neutralColor: 0xe67e22,
+  negativeColor: 0xe91e63,
+  streamingColor: 0x6441a4,
+  listeningColor: 0x1db954
+},
 deleteTimeThreshold: 1,
+editTimeThreshold: 0,
 guildChannelMap: {
   'GUILD_1_ID': 'TEXT_CHANNEL_1_ID',
   'GUILD_2_ID': 'TEXT_CHANNEL_2_ID',
@@ -41,9 +44,9 @@ guildChannelMap: {
 }
 ```
 
-> `clientMap` labels the client the user is connecting from.
+> `clientMap` denotes the client the user is connecting from.
 
-> Message deletions that occur in less time than the `deleteTimeThreshold` (in seconds) will not be logged.
+> Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
 
 Visit for more help or information!
 
