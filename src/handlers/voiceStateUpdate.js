@@ -1,10 +1,11 @@
 const Time = require('../classes/Time');
 const VoiceFactory = require('../classes/VoiceFactory');
+const isLoggedGuild = require('../util/isLoggedGuild');
 const send = require('../util/send');
 
 const voiceCache = {};
 
-const _getStateEnum = (oldChannel, newChannel) =>
+const _getVoiceState = (oldChannel, newChannel) =>
   oldChannel && newChannel ? 'CHANGE' : Boolean(newChannel) ? 'JOIN' : 'LEAVE';
 
 const _getHumanizedElapsedTimeText = (state, userId) => {
@@ -28,7 +29,9 @@ const _getHumanizedElapsedTimeText = (state, userId) => {
 };
 
 module.exports = (oldState, newState) => {
-  const state = _getStateEnum(oldState.channel, newState.channel);
+  if (!isLoggedGuild(newState.member.guild)) return;
+
+  const state = _getVoiceState(oldState.channel, newState.channel);
   if (state === 'CHANGE' && oldState.channel.id === newState.channel.id) return;
 
   const humanizedElapsedTimeText = _getHumanizedElapsedTimeText(
