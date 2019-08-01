@@ -1,18 +1,22 @@
-const { listeningColor } = require('../config');
+const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 
-module.exports = (key, activity) => {
-  const listeningRegExp = /spotify/gi;
+const listeningRegExp = /spotify/gi;
+
+module.exports = (state, activity) => {
   if (!listeningRegExp.test(activity.name)) return;
 
-  const stateMap = {
-    true: { footerText: 'Started listening' },
-    false: { footerText: 'Stopped listening' },
-    null: { footerText: 'Changed listening' }
-  };
+  const embed = new AuditLogEmbedBuilder()
+    .setColor('listeningColor')
+    .setBody(activity.name);
 
-  return {
-    color: listeningColor,
-    content: activity.name,
-    state: stateMap[key]
-  };
+  switch (state) {
+    case 'true':
+      return embed.setFooter('Started listening');
+    case 'false':
+      return embed.setFooter('Stopped listening');
+    case 'null':
+      return embed.setFooter('Changed listening');
+  }
+
+  return null;
 };

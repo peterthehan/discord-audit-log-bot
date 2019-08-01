@@ -1,13 +1,15 @@
-const handler = event => require(`../handlers/${event}`);
+const _handler = event => require(`../handlers/${event}`);
 
 module.exports = client => {
-  client.once('ready', () => handler('ready')(client));
-  client.on('guildMemberAdd', handler('guildMemberAdd'));
-  client.on('guildMemberRemove', handler('guildMemberRemove'));
-  client.on('messageDelete', handler('messageDelete'));
-  client.on('messageUpdate', handler('messageUpdate'));
-  client.on('presenceUpdate', handler('presenceUpdate'));
-  client.on('userUpdate', handler('userUpdate'));
-  client.on('voiceStateUpdate', handler('voiceStateUpdate'));
+  client.once('ready', () => _handler('ready')(client));
   process.on('unhandledRejection', console.warn);
+  [
+    'guildMemberAdd',
+    'guildMemberRemove',
+    'messageDelete',
+    'messageUpdate',
+    'presenceUpdate',
+    'userUpdate',
+    'voiceStateUpdate'
+  ].forEach(handlerName => client.on(handlerName, _handler(handlerName)));
 };

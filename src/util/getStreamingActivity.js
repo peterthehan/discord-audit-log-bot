@@ -1,21 +1,23 @@
-const { streamingColor } = require('../config');
-const getHyperlink = require('./getHyperlink');
+const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 
-module.exports = (key, activity) => {
-  const streamingRegExp = /twitch/gi;
+const streamingRegExp = /twitch/gi;
+
+module.exports = (state, activity) => {
   if (!activity.url || !streamingRegExp.test(activity.url)) return;
 
-  const stateMap = {
-    true: { footerText: 'Started stream' },
-    false: { footerText: 'Stopped stream' },
-    null: { footerText: 'Changed stream' }
-  };
+  const embed = new AuditLogEmbedBuilder()
+    .setColor('streamingColor')
+    .setBody(`${activity.details}: ${activity.name}`)
+    .setLink(activity.url);
 
-  return {
-    color: streamingColor,
-    content: `${activity.details}: ${activity.name} ${getHyperlink(
-      activity.url
-    )}`,
-    state: stateMap[key]
-  };
+  switch (state) {
+    case 'true':
+      return embed.setFooter('Started stream');
+    case 'false':
+      return embed.setFooter('Stopped stream');
+    case 'null':
+      return embed.setFooter('Changed stream');
+  }
+
+  return null;
 };

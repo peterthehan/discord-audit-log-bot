@@ -1,24 +1,57 @@
 const ActivityFactory = require('../classes/ActivityFactory');
-const getActivityState = require('../util/getActivityState');
-const isInvalidGuild = require('../util/isInvalidGuild');
-const isLoggedActivity = require('../util/isLoggedActivity');
-const isSameActivity = require('../util/isSameActivity');
+const isLoggedGuild = require('../util/isLoggedGuild');
 const send = require('../util/send');
 
+const loggedActivityType = ['STREAMING'];
+
+const _isSameActivity = (oldActivity, newActivity) =>
+  (!oldActivity && !newActivity) ||
+  (oldActivity && oldActivity.equals(newActivity)) ||
+  (newActivity && newActivity.equals(oldActivity));
+
+const _isLoggedActivity = (oldActivity, newActivity, type) =>
+  (oldActivity && oldActivity.type === type) ||
+  (newActivity && newActivity.type === type);
+
+const _getActivityState = (oldActivity, newActivity, type) => {
+  if (
+    (!oldActivity || oldActivity.type !== type) &&
+    newActivity.type === type
+  ) {
+    return {
+      state: 'true',
+      activity: newActivity
+    };
+  } else if (
+    (!newActivity || newActivity.type !== type) &&
+    oldActivity.type === type
+  ) {
+    return {
+      state: 'false',
+      activity: oldActivity
+    };
+  }
+
+  return {
+    state: 'null',
+    activity: newActivity
+  };
+};
+
 module.exports = (oldPresence, newPresence) => {
-  if (isInvalidGuild(newPresence.guild)) return;
+  if (!isLoggedGuild(newPresence.guild)) return;
 
   const oldActivity = oldPresence ? oldPresence.activity : null;
   const newActivity = newPresence.activity;
-  if (isSameActivity(oldActivity, newActivity)) return;
+  if (_isSameActivity(oldActivity, newActivity)) return;
 
-  const type = ['STREAMING'].find(type =>
-    isLoggedActivity(oldActivity, newActivity, type)
+  const type = loggedActivityType.find(type =>
+    _isLoggedActivity(oldActivity, newActivity, type)
   );
   if (!type) return;
 
-  const { state, activity } = getActivityState(oldActivity, newActivity, type);
-  const embed = new ActivityFactory(state, activity).getActivity(type);
+  const activityState = _getActivityState(oldActivity, newActivity, type);
+  const embed = new ActivityFactory(activityState).createAuditLogEmbed(type);
   if (!embed) return;
 
   const user = [oldPresence, newPresence].filter(Boolean)[0].user;

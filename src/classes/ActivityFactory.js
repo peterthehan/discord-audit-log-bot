@@ -2,13 +2,13 @@ const getListeningActivity = require('../util/getListeningActivity');
 const getStreamingActivity = require('../util/getStreamingActivity');
 
 module.exports = class ActivityFactory {
-  constructor(state, activity) {
-    this.state = state;
-    this.activity = activity;
+  constructor(activityState) {
+    this.state = activityState.state;
+    this.activity = activityState.activity;
   }
 
-  getActivity(activityType) {
-    switch (activityType) {
+  createAuditLogEmbed(type) {
+    switch (type) {
       case 'LISTENING':
         return getListeningActivity(this.state, this.activity);
       case 'STREAMING':
