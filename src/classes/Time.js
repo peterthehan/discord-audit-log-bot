@@ -6,7 +6,7 @@ module.exports = class Time {
   getElapsedTime() {
     if (!this.date) return -1;
     const elapsedTime = ((Date.now() - this.date) / 1000).toFixed(1);
-    return elapsedTime < 0 ? 0 : elapsedTime;
+    return elapsedTime <= 0 ? 0 : elapsedTime;
   }
 
   getHumanizedElapsedTime() {
