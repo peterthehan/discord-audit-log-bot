@@ -2,6 +2,7 @@ const secondsInYear = 31536000;
 const secondsInDay = 86400;
 const secondsInHour = 3600;
 const secondsInMinute = 60;
+const millisecondsInSecond = 1000;
 
 module.exports = class Time {
   constructor(date) {
@@ -10,7 +11,10 @@ module.exports = class Time {
 
   getElapsedTime() {
     if (!this.date) return -1;
-    const elapsedTime = ((Date.now() - this.date) / 1000).toFixed(1);
+    const elapsedTime = (
+      (Date.now() - this.date) /
+      millisecondsInSecond
+    ).toFixed(1);
     return elapsedTime <= 0 ? 0 : elapsedTime;
   }
 
