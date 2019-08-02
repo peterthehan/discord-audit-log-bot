@@ -1,3 +1,8 @@
+const secondsInYear = 31536000;
+const secondsInDay = 86400;
+const secondsInHour = 3600;
+const secondsInMinute = 60;
+
 module.exports = class Time {
   constructor(date) {
     this.date = date;
@@ -14,17 +19,16 @@ module.exports = class Time {
     if (seconds < 0) return '?';
     if (seconds < 60) return `${seconds}s`;
 
-    const units = ['h', 'm', 's'];
-    return new Date(seconds * 1000)
-      .toISOString()
-      .substr(11, 8)
-      .split(':')
-      .map(time => parseInt(time, 10))
-      .reduce(
-        (hms, time, index) =>
-          !hms && !time ? hms : `${hms}${time}${units[index]}`,
-        ''
-      );
+    return [
+      [Math.floor(seconds / secondsInYear), 'y'],
+      [Math.floor((seconds % secondsInYear) / secondsInDay), 'd'],
+      [Math.floor((seconds % secondsInDay) / secondsInHour), 'h'],
+      [Math.floor((seconds % secondsInHour) / secondsInMinute), 'm'],
+      [Math.floor(seconds % secondsInMinute), 's']
+    ]
+      .filter(duration => duration[0])
+      .map(duration => `${duration[0]}${duration[1]}`)
+      .join('');
   }
 
   toCleanISOString() {

@@ -11,7 +11,7 @@ module.exports = guildMember => {
     .setColor('positiveColor')
     .setUser(guildMember.user)
     .setBody(`Account created: ${time.toCleanISOString()}`)
-    .setFooter(`Joined the server`);
+    .setFooter('Joined the server');
 
   send(guildMember.guild, embed);
 };

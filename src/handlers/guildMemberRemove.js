@@ -11,7 +11,7 @@ module.exports = guildMember => {
     .setColor('negativeColor')
     .setUser(guildMember.user)
     .setBody(`Joined server: ${time.toCleanISOString()}`)
-    .setFooter(`Left the server`);
+    .setFooter(`Left the server after ${time.getHumanizedElapsedTime()}`);
 
   send(guildMember.guild, embed);
 };
