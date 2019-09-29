@@ -6,7 +6,7 @@ module.exports = {
     positiveColor: 0x3498db,
     neutralColor: 0xe67e22,
     negativeColor: 0xe91e63,
-    streamingColor: 0x6441a4,
+    streamingColor: 0x9146ff,
     listeningColor: 0x1db954
   },
   deleteTimeThreshold: 1,
