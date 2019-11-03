@@ -11,11 +11,10 @@ module.exports = class Time {
 
   getElapsedTime() {
     if (!this.date) return -1;
-    const elapsedTime = (
-      (Date.now() - this.date) /
-      millisecondsInSecond
-    ).toFixed(1);
-    return elapsedTime <= 0 ? 0 : elapsedTime;
+
+    const elapsedTime = (Date.now() - this.date) / millisecondsInSecond;
+
+    return elapsedTime <= 0 ? 0 : elapsedTime.toFixed(1);
   }
 
   getHumanizedElapsedTime() {
@@ -24,14 +23,15 @@ module.exports = class Time {
     if (seconds < 60) return `${seconds}s`;
 
     return [
-      [Math.floor(seconds / secondsInYear), 'y'],
-      [Math.floor((seconds % secondsInYear) / secondsInDay), 'd'],
-      [Math.floor((seconds % secondsInDay) / secondsInHour), 'h'],
-      [Math.floor((seconds % secondsInHour) / secondsInMinute), 'm'],
-      [Math.floor(seconds % secondsInMinute), 's']
+      { time: seconds / secondsInYear, label: 'y' },
+      { time: (seconds % secondsInYear) / secondsInDay, label: 'd' },
+      { time: (seconds % secondsInDay) / secondsInHour, label: 'h' },
+      { time: (seconds % secondsInHour) / secondsInMinute, label: 'm' },
+      { time: seconds % secondsInMinute, label: 's' }
     ]
-      .filter(duration => duration[0])
-      .map(duration => `${duration[0]}${duration[1]}`)
+      .map(({ time, label }) => ({ time: Math.floor(time), label }))
+      .filter(({ time }) => time)
+      .map(({ time, label }) => `${time}${label}`)
       .join('');
   }
 
@@ -41,6 +41,6 @@ module.exports = class Time {
           .toISOString()
           .replace('T', ' @ ')
           .replace(/\.\d+Z$/, '')
-      : 'Date not found!';
+      : '?';
   }
 };
