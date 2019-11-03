@@ -1,13 +1,7 @@
-const imageRegExp = /^.*\.(png|jpe?g|gif|webp)$/i;
-
 module.exports = message => {
-  if (!message.attachments.size) return [''];
-
   const images = message.attachments
-    .filter(attachment => imageRegExp.test(attachment.proxyURL))
-    .map(attachment => attachment.proxyURL);
+    .filter(({ proxyURL }) => /\.(gif|jpe?g|png|webp)$/i.test(proxyURL))
+    .map(({ proxyURL }) => proxyURL);
 
-  if (!images.length) images.push('');
-
-  return images;
+  return images.length ? images : [''];
 };
