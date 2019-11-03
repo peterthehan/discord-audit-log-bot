@@ -1,5 +1,14 @@
 module.exports = {
   token: ('TOKEN' in process.env ? process.env : require('../config')).TOKEN,
+  eventsLogged: [
+    'guildMemberAdd',
+    'guildMemberRemove',
+    'messageDelete',
+    'messageUpdate',
+    'presenceUpdate',
+    'userUpdate',
+    'voiceStateUpdate'
+  ],
   clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
   colors: {
     blurpleColor: 0x7289da,
