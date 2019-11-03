@@ -21,6 +21,15 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 
 ```js
 clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
+eventsLogged: [
+  'guildMemberAdd',
+  'guildMemberRemove',
+  'messageDelete',
+  'messageUpdate',
+  'presenceUpdate',
+  'userUpdate',
+  'voiceStateUpdate'
+],
 colors: {
   blurpleColor: 0x7289da,
   positiveColor: 0x3498db,
@@ -40,6 +49,8 @@ guildChannelMap: {
 ```
 
 > `clientMap` denotes the active clients the user is connecting from. This displays in the embed's footer.
+
+> `eventsLogged` is a list of the events that are logged.
 
 > Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
 
