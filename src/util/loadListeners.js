@@ -1,7 +1,7 @@
-const _handler = event => require(`../handlers/${event}`);
+const handler = event => require(`../handlers/${event}`);
 
 module.exports = client => {
-  client.once('ready', () => _handler('ready')(client));
+  client.once('ready', () => handler('ready')(client));
   process.on('unhandledRejection', console.warn);
   [
     'guildMemberAdd',
@@ -11,5 +11,5 @@ module.exports = client => {
     'presenceUpdate',
     'userUpdate',
     'voiceStateUpdate'
-  ].forEach(handlerName => client.on(handlerName, _handler(handlerName)));
+  ].forEach(handlerName => client.on(handlerName, handler(handlerName)));
 };

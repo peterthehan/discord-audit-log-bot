@@ -1,4 +1,4 @@
-const jsdiff = require('diff');
+const { diffWordsWithSpace, diffLines } = require('diff');
 
 const markdownRegExp = /\*|~~/g;
 
@@ -12,19 +12,18 @@ const getSmallestString = strings =>
   );
 
 module.exports = (oldString, newString) => {
-  const diffs = [jsdiff.diffWordsWithSpace, jsdiff.diffLines].map(
-    diffFunction =>
-      diffFunction(
-        oldString.replace(markdownRegExp, ''),
-        newString.replace(markdownRegExp, '')
-      ).reduce((diffString, part) => {
-        diffString += applyStyle(
-          part.value,
-          part.added ? '***' : part.removed ? '~~' : ''
-        );
+  oldString = oldString.replace(markdownRegExp, '');
+  newString = newString.replace(markdownRegExp, '');
 
-        return diffString;
-      }, '')
+  const diffs = [diffWordsWithSpace, diffLines].map(diffFunction =>
+    diffFunction(oldString, newString).reduce((diffString, part) => {
+      diffString += applyStyle(
+        part.value,
+        part.added ? '***' : part.removed ? '~~' : ''
+      );
+
+      return diffString;
+    }, '')
   );
 
   return getSmallestString(diffs);
