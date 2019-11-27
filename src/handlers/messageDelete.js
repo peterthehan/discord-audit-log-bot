@@ -1,4 +1,4 @@
-const { deleteTimeThreshold } = require('../config');
+const { deleteTimeThreshold, guildChannelMap } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const Time = require('../classes/Time');
 const getImages = require('../util/getImages');
@@ -7,6 +7,13 @@ const send = require('../util/send');
 
 module.exports = message => {
   if (!isLoggedGuild(message.guild)) return;
+  if (
+    guildChannelMap[message.guild.id].ignoreChannelIds.includes(
+      message.channel.id
+    )
+  ) {
+    return;
+  }
   if (message.author.bot) return;
 
   const time = new Time(message.createdTimestamp);

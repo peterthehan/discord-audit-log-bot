@@ -1,4 +1,4 @@
-const { editTimeThreshold } = require('../config');
+const { editTimeThreshold, guildChannelMap } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const Time = require('../classes/Time');
 const getDiff = require('../util/getDiff');
@@ -8,6 +8,13 @@ const send = require('../util/send');
 
 module.exports = (oldMessage, newMessage) => {
   if (!isLoggedGuild(newMessage.guild)) return;
+  if (
+    guildChannelMap[newMessage.guild.id].ignoreChannelIds.includes(
+      newMessage.channel.id
+    )
+  ) {
+    return;
+  }
   if (newMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
 

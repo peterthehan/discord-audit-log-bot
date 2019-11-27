@@ -5,7 +5,7 @@ const auditLogChannelCache = {};
 
 const _cacheAuditLogChannel = async guild => {
   const auditLogChannel = await guild.client.channels.fetch(
-    guildChannelMap[guild.id]
+    guildChannelMap[guild.id].logChannelId
   );
   if (!auditLogChannel) return;
 

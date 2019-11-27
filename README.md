@@ -41,9 +41,14 @@ colors: {
 deleteTimeThreshold: 1,
 editTimeThreshold: 0,
 guildChannelMap: {
-  'GUILD_1_ID': 'TEXT_CHANNEL_1_ID',
-  'GUILD_2_ID': 'TEXT_CHANNEL_2_ID',
-  'GUILD_3_ID': 'TEXT_CHANNEL_3_ID',
+  'GUILD_1_ID': {
+    logChannelId: 'TEXT_CHANNEL_1_ID',
+    ignoreChannelIds: ['TEXT_CHANNEL_2_ID']
+  },
+  'GUILD_2_ID': {
+    logChannelId: 'TEXT_CHANNEL_3_ID',
+    ignoreChannelIds: ['TEXT_CHANNEL_4_ID']
+  },
   // ...Add as many guild-channel mappings as you want.
 }
 ```
