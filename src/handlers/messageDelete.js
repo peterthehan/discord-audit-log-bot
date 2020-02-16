@@ -21,7 +21,7 @@ module.exports = message => {
     .setColor(negative)
     .setUser(message.author)
     .setChannel(message.channel)
-    .setBody(!index ? message.content : '')
+    .setBody(message.content)
     .setImages(getImages(message))
     .setFooter(`Deleted message after ${time.getHumanizedElapsedTime()}`);
 
