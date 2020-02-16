@@ -1,14 +1,15 @@
-const { clientMap, colors } = require('../config');
+const { clientMap } = require('../config');
 
 module.exports = class AuditLogEmbedBuilder {
   constructor() {
-    this.color = '';
+    this.color = null;
     this.user = null;
     this.channel = null;
-    this.body = '';
-    this.link = '';
-    this.image = '';
-    this.footer = '';
+    this.body = null;
+    this.link = null;
+    this.images = null;
+    this.footer = null;
+    this.timestamp = Date.now();
   }
 
   setColor(color) {
@@ -36,8 +37,8 @@ module.exports = class AuditLogEmbedBuilder {
     return this;
   }
 
-  setImage(image) {
-    this.image = image;
+  setImages(images) {
+    this.images = images;
     return this;
   }
 
@@ -47,66 +48,57 @@ module.exports = class AuditLogEmbedBuilder {
   }
 
   _getColor() {
-    return this.color in colors ? colors[this.color] : null;
+    return this.color;
   }
 
-  _getTitle() {
-    if (!this.user) return '';
-    const user = `${this.user} (${this.user.tag})`;
-    return !this.channel ? user : `${user} | ${this.channel}`;
+  _getDescription(index) {
+    if (!this.user) return null;
+
+    const title = [`${this.user} (${this.user.tag})`, this.channel]
+      .filter(Boolean)
+      .join(' | ');
+    const link = this.link ? `[[link]](${this.link})` : '';
+
+    return (index === 0
+      ? `${title}\n${this.body} ${link}`
+      : `${title}\n${link}`
+    ).trim();
   }
 
-  _getBody() {
-    return this.body;
+  _getImages() {
+    if (!this.images) return [{}];
+    if (!this.images.length) return [{}];
+
+    return this.images.map(url => ({ image: { url } }));
   }
 
-  _getLink() {
-    return !this.link ? '' : `[[link]](${this.link})`;
-  }
+  _getFooter(index, length) {
+    if (!this.footer) return null;
 
-  _getDescription() {
-    const description = `${this._getTitle()}\n${this._getBody()} ${this._getLink()}`.trim();
-    return !description ? null : description;
-  }
-
-  _getImage() {
-    return !this.image ? null : { url: this.image };
-  }
-
-  _getDisplayAvatarUrl() {
-    return !this.user ? null : { icon_url: this.user.displayAvatarURL() };
-  }
-
-  _getClients() {
-    return (this.user && this.user.presence && this.user.presence.clientStatus
-      ? Object.keys(this.user.presence.clientStatus)
-      : []
+    const pages = length === 1 ? '' : `${index + 1} of ${length}`;
+    const clients = Object.keys(
+      (this.user && this.user.presence.clientStatus) || {}
     )
       .map(client => clientMap[client])
       .join('');
+
+    return {
+      icon_url: this.user && this.user.displayAvatarURL(),
+      text: [this.footer, pages, clients].filter(Boolean).join(' | ')
+    };
   }
 
-  _getFooterText() {
-    if (!this.footer) return null;
-    const clients = this._getClients();
-    return { text: !clients ? this.footer : `${this.footer} | ${clients}` };
-  }
-
-  _getFooter() {
-    const icon_url = this._getDisplayAvatarUrl();
-    const text = this._getFooterText();
-    return !icon_url && !text ? null : { ...icon_url, ...text };
+  _getTimestamp() {
+    return this.timestamp;
   }
 
   build() {
-    return {
-      embed: {
-        timestamp: Date.now(),
-        color: this._getColor(),
-        description: this._getDescription(),
-        image: this._getImage(),
-        footer: this._getFooter()
-      }
-    };
+    return this._getImages().map((image, index, images) => ({
+      color: this._getColor(),
+      description: this._getDescription(index),
+      ...image,
+      footer: this._getFooter(index, images.length),
+      timestamp: this._getTimestamp()
+    }));
   }
 };
