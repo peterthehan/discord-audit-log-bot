@@ -1,5 +1,5 @@
 const {
-  colors: { negativeColor },
+  colors: { negative },
   deleteTimeThreshold
 } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
@@ -18,7 +18,7 @@ module.exports = message => {
   if (time.getElapsedTime() < deleteTimeThreshold) return;
 
   const builder = new AuditLogEmbedBuilder()
-    .setColor(negativeColor)
+    .setColor(negative)
     .setUser(message.author)
     .setChannel(message.channel)
     .setBody(!index ? message.content : '')

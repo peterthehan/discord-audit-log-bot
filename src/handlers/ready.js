@@ -1,6 +1,6 @@
 const { name } = require('../../package');
 const {
-  colors: { blurpleColor },
+  colors: { base },
   guildChannelMap
 } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
@@ -10,7 +10,7 @@ module.exports = client => {
   console.log(`${name}|${client.user.tag}: Ready`);
 
   const builder = new AuditLogEmbedBuilder()
-    .setColor(blurpleColor)
+    .setColor(base)
     .setFooter('Made with ❤ by peterthehan');
 
   Object.keys(guildChannelMap)

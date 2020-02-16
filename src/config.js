@@ -5,18 +5,15 @@ module.exports = {
     'guildMemberRemove',
     'messageDelete',
     'messageUpdate',
-    'presenceUpdate',
     'userUpdate',
     'voiceStateUpdate'
   ],
   clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
   colors: {
-    blurpleColor: 0x7289da,
-    positiveColor: 0x3498db,
-    neutralColor: 0xe67e22,
-    negativeColor: 0xe91e63,
-    streamingColor: 0x9146ff,
-    listeningColor: 0x1db954
+    base: 0x7289da,
+    positive: 0x3498db,
+    neutral: 0xe67e22,
+    negative: 0xe91e63
   },
   deleteTimeThreshold: 1,
   editTimeThreshold: 0,

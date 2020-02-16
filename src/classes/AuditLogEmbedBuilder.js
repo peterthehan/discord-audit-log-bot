@@ -66,8 +66,7 @@ module.exports = class AuditLogEmbedBuilder {
   }
 
   _getImages() {
-    if (!this.images) return [{}];
-    if (!this.images.length) return [{}];
+    if (!this.images || !this.images.length) return [{}];
 
     return this.images.map(url => ({ image: { url } }));
   }

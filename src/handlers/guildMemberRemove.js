@@ -1,5 +1,5 @@
 const {
-  colors: { negativeColor }
+  colors: { negative }
 } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const Time = require('../classes/Time');
@@ -11,7 +11,7 @@ module.exports = guildMember => {
 
   const time = new Time(guildMember.joinedAt);
   const builder = new AuditLogEmbedBuilder()
-    .setColor(negativeColor)
+    .setColor(negative)
     .setUser(guildMember.user)
     .setBody(`Joined server: ${time.toCleanISOString()}`)
     .setFooter(`Left the server after ${time.getHumanizedElapsedTime()}`);

@@ -1,6 +1,16 @@
-const { guildChannelMap } = require('../config');
+const {
+  colors: { neutral },
+  guildChannelMap
+} = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const send = require('../util/send');
+
+const getIdentifierFooter = (isSameUsername, isSameDiscriminator) =>
+  !isSameUsername && !isSameDiscriminator
+    ? 'Changed tag'
+    : !isSameUsername
+    ? 'Changed username'
+    : 'Changed discriminator';
 
 module.exports = (oldUser, newUser) => {
   if (oldUser.bot || newUser.bot) return;
@@ -10,38 +20,27 @@ module.exports = (oldUser, newUser) => {
   const isSameDiscriminator = oldUser.discriminator === newUser.discriminator;
   const isSameDisplayAvatarURL =
     oldUser.displayAvatarURL() === newUser.displayAvatarURL();
-  for (const guildId of Object.keys(guildChannelMap)) {
-    const guild = newUser.client.guilds.resolve(guildId);
-    if (!guild) continue;
-    if (!guild.members.resolve(newUser.id)) continue;
 
-    const embed = new AuditLogEmbedBuilder()
-      .setColor('neutralColor')
-      .setUser(newUser);
+  const builder = new AuditLogEmbedBuilder().setColor(neutral).setUser(newUser);
 
-    if (!isSameUsername || !isSameDiscriminator) {
-      embed
-        .setBody(`${oldUser.tag} ➡️ ${newUser.tag}`)
-        .setFooter(
-          `Changed ${
-            !isSameUsername && !isSameDiscriminator
-              ? 'tag'
-              : !isSameUsername
-              ? 'username'
-              : 'discriminator'
-          }`
-        );
+  Object.keys(guildChannelMap)
+    .map(guildId => newUser.client.guilds.resolve(guildId))
+    .filter(guild => guild && guild.members.resolve(newUser.id))
+    .forEach(async guild => {
+      if (!isSameUsername || !isSameDiscriminator) {
+        builder
+          .setBody(`${oldUser.tag} ➡️ ${newUser.tag}`)
+          .setImages(null)
+          .setFooter(getIdentifierFooter(isSameUsername, isSameDiscriminator));
+        await send(guild, builder);
+      }
 
-      send(guild, embed);
-    }
-
-    if (!isSameDisplayAvatarURL) {
-      embed
-        .setBody('Old avatar:')
-        .setImage(oldUser.displayAvatarURL())
-        .setFooter('Changed avatar');
-
-      send(guild, embed);
-    }
-  }
+      if (!isSameDisplayAvatarURL) {
+        builder
+          .setBody('Old avatar:')
+          .setImages([oldUser.displayAvatarURL()])
+          .setFooter('Changed avatar');
+        await send(guild, builder);
+      }
+    });
 };

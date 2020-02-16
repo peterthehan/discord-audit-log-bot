@@ -1,5 +1,5 @@
 const {
-  colors: { positiveColor }
+  colors: { positive }
 } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const Time = require('../classes/Time');
@@ -11,7 +11,7 @@ module.exports = guildMember => {
 
   const time = new Time(guildMember.user.createdAt);
   const builder = new AuditLogEmbedBuilder()
-    .setColor(positiveColor)
+    .setColor(positive)
     .setUser(guildMember.user)
     .setBody(`Account created: ${time.toCleanISOString()}`)
     .setFooter('Joined the server');

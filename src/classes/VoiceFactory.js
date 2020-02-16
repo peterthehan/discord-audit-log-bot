@@ -1,5 +1,5 @@
 const {
-  colors: { positiveColor, neutralColor, negativeColor }
+  colors: { positive, neutral, negative }
 } = require('../config');
 const AuditLogEmbedBuilder = require('./AuditLogEmbedBuilder');
 const Time = require('./Time');
@@ -40,12 +40,12 @@ module.exports = class VoiceFactory {
     switch (state) {
       case 'JOIN':
         return builder
-          .setColor(positiveColor)
+          .setColor(positive)
           .setBody(this.newChannel)
           .setFooter('Joined voice');
       case 'LEAVE':
         return builder
-          .setColor(negativeColor)
+          .setColor(negative)
           .setBody(this.oldChannel)
           .setFooter(
             this.elapsedTime
@@ -54,7 +54,7 @@ module.exports = class VoiceFactory {
           );
       case 'CHANGE':
         return builder
-          .setColor(neutralColor)
+          .setColor(neutral)
           .setBody(`${this.oldChannel} ➡️ ${this.newChannel}`)
           .setFooter(
             this.elapsedTime

@@ -1,5 +1,5 @@
 const {
-  colors: { neutralColor },
+  colors: { neutral },
   editTimeThreshold
 } = require('../config');
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
@@ -21,7 +21,7 @@ module.exports = (oldMessage, newMessage) => {
   if (time.getElapsedTime() < editTimeThreshold) return;
 
   const builder = new AuditLogEmbedBuilder()
-    .setColor(neutralColor)
+    .setColor(neutral)
     .setUser(newMessage.author)
     .setChannel(newMessage.channel)
     .setBody(getDiff(oldMessage.content, newMessage.content))
