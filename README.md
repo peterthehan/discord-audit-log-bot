@@ -48,11 +48,17 @@ guildChannelMap: {
 }
 ```
 
-> `clientMap` denotes the active clients the user is connecting from. This displays in the embed's footer.
+> `clientMap` denotes the active clients the user is connected to. This displays in the log embed's footer.
 
-> `events` is a list of the events that are logged.
+> `events` denotes the type of events that are logged.
+
+> `colors` are used to color code log embeds.
 
 > Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
+
+> `logChannelId` is the channel the bot logs messages into.
+
+> `ignoreChannelIds` tells the bot not to log messages from the listed channels (e.g. hidden admin-only channels, read-only information channels, etc).
 
 Visit for more help or information!
 
