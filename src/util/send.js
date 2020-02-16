@@ -3,8 +3,8 @@ const isLoggedGuild = require('./isLoggedGuild');
 
 const auditLogChannelCache = {};
 
-const _cacheAuditLogChannel = async guild => {
-  const auditLogChannel = await guild.client.channels.fetch(
+const _cacheAuditLogChannel = guild => {
+  const auditLogChannel = guild.channels.resolve(
     guildChannelMap[guild.id].logChannelId
   );
   if (!auditLogChannel) return;
@@ -12,16 +12,16 @@ const _cacheAuditLogChannel = async guild => {
   auditLogChannelCache[guild.id] = auditLogChannel;
 };
 
-const _getAuditLogChannel = async guild => {
-  if (!(guild.id in auditLogChannelCache)) await _cacheAuditLogChannel(guild);
+const _getAuditLogChannel = guild => {
+  if (!(guild.id in auditLogChannelCache)) _cacheAuditLogChannel(guild);
 
   return auditLogChannelCache[guild.id];
 };
 
-module.exports = async (guild, embed) => {
+module.exports = (guild, embed) => {
   if (!isLoggedGuild(guild)) return;
 
-  const auditLogChannel = await _getAuditLogChannel(guild);
+  const auditLogChannel = _getAuditLogChannel(guild);
   if (!auditLogChannel) return;
 
   auditLogChannel.send(embed.build());
