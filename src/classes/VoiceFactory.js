@@ -1,32 +1,68 @@
+const {
+  colors: { positiveColor, neutralColor, negativeColor }
+} = require('../config');
 const AuditLogEmbedBuilder = require('./AuditLogEmbedBuilder');
+const Time = require('./Time');
+
+const voiceCache = {};
 
 module.exports = class VoiceFactory {
-  constructor(user, oldChannel, newChannel, humanizedElapsedTimeText) {
-    this.auditLogEmbedBuilder = new AuditLogEmbedBuilder().setUser(user);
+  constructor(user, oldChannel, newChannel) {
+    this.user = user;
     this.oldChannel = oldChannel;
     this.newChannel = newChannel;
-    this.humanizedElapsedTimeText = humanizedElapsedTimeText;
+    this.elapsedTime = null;
+  }
+
+  _setElapsedTime(state) {
+    if (state === 'JOIN') {
+      this.elapsedTime = null;
+      voiceCache[this.user.id] = Date.now();
+      return;
+    }
+
+    if (this.user.id in voiceCache) {
+      this.elapsedTime = new Time(
+        voiceCache[this.user.id]
+      ).getHumanizedElapsedTime();
+      delete voiceCache[this.user.id];
+    }
+
+    if (state === 'CHANGE') {
+      voiceCache[this.user.id] = Date.now();
+    }
   }
 
   createAuditLogEmbed(state) {
+    this._setElapsedTime(state);
+    const builder = new AuditLogEmbedBuilder().setUser(this.user);
+
     switch (state) {
       case 'JOIN':
-        return this.auditLogEmbedBuilder
-          .setColor('positiveColor')
+        return builder
+          .setColor(positiveColor)
           .setBody(this.newChannel)
           .setFooter('Joined voice');
       case 'LEAVE':
-        return this.auditLogEmbedBuilder
-          .setColor('negativeColor')
+        return builder
+          .setColor(negativeColor)
           .setBody(this.oldChannel)
-          .setFooter(`Left voice${this.humanizedElapsedTimeText}`);
+          .setFooter(
+            this.elapsedTime
+              ? `Left voice after ${this.elapsedTime}`
+              : 'Left voice'
+          );
       case 'CHANGE':
-        return this.auditLogEmbedBuilder
-          .setColor('neutralColor')
+        return builder
+          .setColor(neutralColor)
           .setBody(`${this.oldChannel} ➡️ ${this.newChannel}`)
-          .setFooter(`Changed voice${this.humanizedElapsedTimeText}`);
+          .setFooter(
+            this.elapsedTime
+              ? `Changed voice after ${this.elapsedTime}`
+              : 'Changed voice'
+          );
     }
 
-    return null;
+    return builder;
   }
 };
