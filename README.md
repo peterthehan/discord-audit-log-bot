@@ -23,6 +23,7 @@ events: [
   'guildMemberAdd',
   'guildMemberRemove',
   'messageDelete',
+  'messageDeleteBulk',
   'messageUpdate',
   'userUpdate',
   'voiceStateUpdate'
