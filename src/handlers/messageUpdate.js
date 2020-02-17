@@ -10,7 +10,7 @@ const isLoggedChannel = require('../util/isLoggedChannel');
 const isLoggedGuild = require('../util/isLoggedGuild');
 const send = require('../util/send');
 
-module.exports = (oldMessage, newMessage) => {
+module.exports = async (oldMessage, newMessage) => {
   if (oldMessage.content === newMessage.content) return;
 
   if (newMessage.author.bot) return;

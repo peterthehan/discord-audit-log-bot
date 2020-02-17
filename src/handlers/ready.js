@@ -6,7 +6,7 @@ const {
 const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const send = require('../util/send');
 
-module.exports = client => {
+module.exports = async client => {
   console.log(`${name}|${client.user.tag}: Ready`);
 
   const builder = new AuditLogEmbedBuilder()

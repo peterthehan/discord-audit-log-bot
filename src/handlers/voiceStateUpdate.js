@@ -5,7 +5,7 @@ const send = require('../util/send');
 const getVoiceState = (oldChannel, newChannel) =>
   oldChannel && newChannel ? 'CHANGE' : Boolean(newChannel) ? 'JOIN' : 'LEAVE';
 
-module.exports = (oldState, newState) => {
+module.exports = async (oldState, newState) => {
   if (!isLoggedGuild(newState.member.guild)) return;
 
   const state = getVoiceState(oldState.channel, newState.channel);

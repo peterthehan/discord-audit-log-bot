@@ -12,7 +12,7 @@ const getIdentifierFooter = (isSameUsername, isSameDiscriminator) =>
     ? 'Changed username'
     : 'Changed discriminator';
 
-module.exports = (oldUser, newUser) => {
+module.exports = async (oldUser, newUser) => {
   if (oldUser.bot || newUser.bot) return;
   if (oldUser.equals(newUser)) return;
 

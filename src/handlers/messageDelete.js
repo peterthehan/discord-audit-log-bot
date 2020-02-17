@@ -9,8 +9,8 @@ const isLoggedChannel = require('../util/isLoggedChannel');
 const isLoggedGuild = require('../util/isLoggedGuild');
 const send = require('../util/send');
 
-module.exports = message => {
-  if (message.author.bot) return;
+module.exports = async (message, isBulkDelete = false) => {
+  if (message.author && message.author.bot) return;
   if (!isLoggedGuild(message.guild)) return;
   if (!isLoggedChannel(message.channel)) return;
 
@@ -23,7 +23,11 @@ module.exports = message => {
     .setChannel(message.channel)
     .setBody(message.content)
     .setImages(getImages(message))
-    .setFooter(`Deleted message after ${time.getHumanizedElapsedTime()}`);
+    .setFooter(
+      isBulkDelete
+        ? `Bulk deleted message after ${time.getHumanizedElapsedTime()}`
+        : `Deleted message after ${time.getHumanizedElapsedTime()}`
+    );
 
   send(message.guild, builder);
 };
