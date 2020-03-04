@@ -1,14 +1,4 @@
 module.exports = {
-  token: ('TOKEN' in process.env ? process.env : require('../config')).TOKEN,
-  events: [
-    'guildMemberAdd',
-    'guildMemberRemove',
-    'messageDelete',
-    'messageDeleteBulk',
-    'messageUpdate',
-    'userUpdate',
-    'voiceStateUpdate'
-  ],
   clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
   colors: {
     base: 0x7289da,

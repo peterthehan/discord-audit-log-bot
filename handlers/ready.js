@@ -1,4 +1,3 @@
-const { name } = require('../../package');
 const {
   colors: { base },
   guildChannelMap
@@ -7,7 +6,7 @@ const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
 const send = require('../util/send');
 
 module.exports = async client => {
-  console.log(`${name}|${client.user.tag}: Ready`);
+  console.log('auditLog: ready');
 
   const builder = new AuditLogEmbedBuilder()
     .setColor(base)
