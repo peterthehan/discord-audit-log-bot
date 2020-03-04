@@ -13,11 +13,11 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 
 ## Setup
 
-1. Adapt and follow the steps found in [create-discord-bot](https://github.com/peterthehan/create-discord-bot).
+1. Follow the instructions in [create-discord-bot](https://github.com/peterthehan/create-discord-bot).
 
-> Follow the [Create Bot](https://github.com/peterthehan/create-discord-bot#create-bot) and [Get Bot](https://github.com/peterthehan/create-discord-bot#get-bot) sections. Remember to replace with the correct project name in step 1 of the [Get Bot](https://github.com/peterthehan/create-discord-bot#get-bot) section!
+2. Download this widget and move it into the [src/widgets](https://github.com/peterthehan/create-discord-bot/blob/master/src/widgets/) folder.
 
-2. Open [src/config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src/config.js) to configure your own settings:
+3. Open [config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/config.js) to configure your own settings:
 
 ```js
 clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
@@ -62,6 +62,8 @@ guildChannelMap: {
 > `logChannelId` is the channel the bot logs messages into.
 
 > `ignoreChannelIds` tells the bot not to log messages from the listed channels (e.g. hidden admin-only channels, read-only information channels, etc).
+
+4. `npm start` to start the bot.
 
 Visit for more help or information!
 
