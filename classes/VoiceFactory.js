@@ -15,21 +15,21 @@ module.exports = class VoiceFactory {
   }
 
   _setElapsedTime(state) {
-    if (state === 'JOIN') {
+    const key = `${state}${this.user.id}`;
+
+    if (['JOIN', 'START'].includes(state)) {
       this.elapsedTime = null;
-      voiceCache[this.user.id] = Date.now();
+      voiceCache[key] = Date.now();
       return;
     }
 
-    if (this.user.id in voiceCache) {
-      this.elapsedTime = new Time(
-        voiceCache[this.user.id]
-      ).getHumanizedElapsedTime();
-      delete voiceCache[this.user.id];
+    if (key in voiceCache) {
+      this.elapsedTime = new Time(voiceCache[key]).getHumanizedElapsedTime();
+      delete voiceCache[key];
     }
 
     if (state === 'CHANGE') {
-      voiceCache[this.user.id] = Date.now();
+      voiceCache[key] = Date.now();
     }
   }
 
@@ -60,6 +60,20 @@ module.exports = class VoiceFactory {
             this.elapsedTime
               ? `Changed voice after ${this.elapsedTime}`
               : 'Changed voice'
+          );
+      case 'START':
+        return builder
+          .setColor(positive)
+          .setBody(this.newChannel)
+          .setFooter('Started streaming');
+      case 'STOP':
+        return builder
+          .setColor(negative)
+          .setBody(this.oldChannel)
+          .setFooter(
+            this.elapsedTime
+              ? `Stopped streaming after ${this.elapsedTime}`
+              : 'Stopped streaming'
           );
     }
 
