@@ -15,7 +15,9 @@ module.exports = class VoiceFactory {
   }
 
   _setElapsedTime(state) {
-    const key = `${state}${this.user.id}`;
+    const key = `${['START', 'STOP'].includes(state) ? 'streaming' : 'voice'}${
+      this.user.id
+    }`;
 
     if (['JOIN', 'START'].includes(state)) {
       this.elapsedTime = null;
