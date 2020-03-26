@@ -35,6 +35,23 @@ module.exports = class VoiceFactory {
     }
   }
 
+  _getActivityDescription(channel) {
+    if (!this.user.presence.activities.length) {
+      return channel;
+    }
+
+    const activity = this.user.presence.activities.find(
+      activity => activity.type !== 'CUSTOM_STATUS'
+    );
+    if (!activity) {
+      return channel;
+    }
+
+    return `${activity.type[0]}${activity.type.slice(1).toLowerCase()} ${
+      activity.name
+    } in ${channel}`;
+  }
+
   createAuditLogEmbed(state) {
     this._setElapsedTime(state);
     const builder = new AuditLogEmbedBuilder().setUser(this.user);
@@ -66,12 +83,12 @@ module.exports = class VoiceFactory {
       case 'START':
         return builder
           .setColor(positive)
-          .setBody(this.newChannel)
+          .setBody(this._getActivityDescription(this.newChannel))
           .setFooter('Started streaming');
       case 'STOP':
         return builder
           .setColor(negative)
-          .setBody(this.oldChannel)
+          .setBody(this._getActivityDescription(this.oldChannel))
           .setFooter(
             this.elapsedTime
               ? `Stopped streaming after ${this.elapsedTime}`
