@@ -47,9 +47,11 @@ module.exports = class VoiceFactory {
       return channel;
     }
 
-    return `${activity.type[0]}${activity.type.slice(1).toLowerCase()} ${
-      activity.name
-    } in ${channel}`;
+    const activityType = `${activity.type[0]}${activity.type
+      .slice(1)
+      .toLowerCase()}`;
+
+    return `${channel}: ${activityType} ${activity.name}`;
   }
 
   createAuditLogEmbed(state) {
