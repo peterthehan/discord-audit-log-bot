@@ -35,12 +35,29 @@ module.exports = class Time {
       .join('');
   }
 
-  toCleanISOString() {
-    return this.date
-      ? this.date
-          .toISOString()
-          .replace('T', ' @ ')
-          .replace(/\.\d+Z$/, '')
-      : '?';
+  _addLeadingZero(number) {
+    return number < 10 ? `0${number}` : number;
+  }
+
+  toLocaleString() {
+    if (!this.date) {
+      return '?';
+    }
+
+    const year = this.date.getFullYear();
+    const month = this._addLeadingZero(this.date.getMonth() + 1);
+    const date = this._addLeadingZero(this.date.getDate());
+    const dateString = `${year}-${month}-${date}`;
+
+    const hours = this._addLeadingZero(this.date.getHours());
+    const minutes = this._addLeadingZero(this.date.getMinutes());
+    const seconds = this._addLeadingZero(this.date.getSeconds());
+    const timeString = `${hours}:${minutes}:${seconds}`;
+
+    const timezone = Intl.DateTimeFormat()
+      .resolvedOptions()
+      .timeZone.replace(/_/g, ' ');
+
+    return `${dateString} @ ${timeString} (${timezone})`;
   }
 };

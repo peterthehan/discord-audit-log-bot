@@ -13,7 +13,7 @@ module.exports = async guildMember => {
   const builder = new AuditLogEmbedBuilder()
     .setColor(negative)
     .setUser(guildMember.user)
-    .setBody(`Joined server: ${time.toCleanISOString()}`)
+    .setBody(`Joined server: ${time.toLocaleString()}`)
     .setFooter(`Left the server after ${time.getHumanizedElapsedTime()}`);
 
   send(guildMember.guild, builder);
