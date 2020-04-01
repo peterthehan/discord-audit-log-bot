@@ -24,15 +24,6 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 
 ```js
 clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
-events: [
-  'guildMemberAdd',
-  'guildMemberRemove',
-  'messageDelete',
-  'messageDeleteBulk',
-  'messageUpdate',
-  'userUpdate',
-  'voiceStateUpdate'
-],
 colors: {
   base: 0x7289da,
   positive: 0x3498db,
