@@ -47,8 +47,6 @@ guildChannelMap: {
 
 > `clientMap` denotes the active clients the user is connected to. This displays in the log embed's footer.
 
-> `events` denotes the type of events that are logged.
-
 > `colors` are used to color code log embeds.
 
 > Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
