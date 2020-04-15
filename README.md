@@ -20,7 +20,7 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 
 2. Download this widget and move it into the [src/widgets](https://github.com/peterthehan/create-discord-bot/blob/master/src/widgets/) folder.
 
-> `npm i -s diff@^4.0.1` to install this widget's dependencies.
+> `npm i -s diff@^4.0.2` to install this widget's dependencies.
 
 3. Open [config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/config.js) to configure your own settings:
 
