@@ -1,6 +1,6 @@
 # Discord Audit Log Bot
 
-[![Discord](https://discordapp.com/api/guilds/258167954913361930/embed.png)](https://discord.gg/WjEFnzC) [![Ko-fi](https://img.shields.io/badge/Donate-Ko--fi-F16061.svg?logo=ko-fi)](https://ko-fi.com/peterthehan) [![Patreon](https://img.shields.io/badge/Donate-Patreon-F96854.svg?logo=patreon)](https://www.patreon.com/bePatron?u=33175931) [![Twitter Follow](https://img.shields.io/twitter/follow/peterthehan.svg?style=social)](https://twitter.com/peterthehan)
+[![Discord](https://discordapp.com/api/guilds/258167954913361930/embed.png)](https://discord.gg/WjEFnzC) [![Twitter Follow](https://img.shields.io/twitter/follow/peterthehan.svg?style=social)](https://twitter.com/peterthehan) [![Ko-fi](https://img.shields.io/badge/Donate-Ko--fi-F16061.svg?logo=ko-fi)](https://ko-fi.com/peterthehan) [![Patreon](https://img.shields.io/badge/Donate-Patreon-F96854.svg?logo=patreon)](https://www.patreon.com/peterthehan)
 
 A Discord bot that fills in the gaps in Discord's Audit Log.
 
@@ -49,13 +49,13 @@ guildChannelMap: {
 
 > `clientMap` denotes the active clients the user is connected to. This displays in the log embed's footer.
 
-> `colors` are used to color code log embeds.
+> `colors` are used to color code log embeds by the action taken.
 
 > Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
 
 > `logChannelId` is the channel the bot logs messages into.
 
-> `ignoreChannelIds` tells the bot not to log messages from the listed channels (e.g. hidden admin-only channels, read-only information channels, etc).
+> `ignoreChannelIds` tells the bot to not log messages from the listed channels (e.g. hidden admin-only channels, read-only information channels, etc).
 
 Visit for more help or information!
 
