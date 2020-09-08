@@ -1,9 +1,13 @@
-const { guildChannelMap } = require('../config');
+const { guildChannelMap } = require("../config");
 
 module.exports = (guild, builder) => {
   const auditLogChannelId = guildChannelMap[guild.id].logChannelId;
   const auditLogChannel = guild.channels.resolve(auditLogChannelId);
-  if (!auditLogChannel) return;
+  if (!auditLogChannel) {
+    return;
+  }
 
-  builder.build().forEach(async embed => await auditLogChannel.send({ embed }));
+  builder
+    .build()
+    .forEach(async (embed) => await auditLogChannel.send({ embed }));
 };

@@ -1,20 +1,21 @@
 const {
   colors: { neutral },
-  guildChannelMap
-} = require('../config');
-const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
-const send = require('../util/send');
+  guildChannelMap,
+} = require("../config");
+const AuditLogEmbedBuilder = require("../classes/AuditLogEmbedBuilder");
+const send = require("../util/send");
 
 const getIdentifierFooter = (isSameUsername, isSameDiscriminator) =>
   !isSameUsername && !isSameDiscriminator
-    ? 'Changed tag'
+    ? "Changed tag"
     : !isSameUsername
-    ? 'Changed username'
-    : 'Changed discriminator';
+    ? "Changed username"
+    : "Changed discriminator";
 
 module.exports = async (oldUser, newUser) => {
-  if (oldUser.bot || newUser.bot) return;
-  if (oldUser.equals(newUser)) return;
+  if (oldUser.bot || newUser.bot || oldUser.equals(newUser)) {
+    return;
+  }
 
   const isSameUsername = oldUser.username === newUser.username;
   const isSameDiscriminator = oldUser.discriminator === newUser.discriminator;
@@ -24,9 +25,9 @@ module.exports = async (oldUser, newUser) => {
   const builder = new AuditLogEmbedBuilder().setColor(neutral).setUser(newUser);
 
   Object.keys(guildChannelMap)
-    .map(guildId => newUser.client.guilds.resolve(guildId))
-    .filter(guild => guild && guild.members.resolve(newUser.id))
-    .forEach(async guild => {
+    .map((guildId) => newUser.client.guilds.resolve(guildId))
+    .filter((guild) => guild && guild.members.resolve(newUser.id))
+    .forEach(async (guild) => {
       if (!isSameUsername || !isSameDiscriminator) {
         builder
           .setBody(`${oldUser.tag} ➡️ ${newUser.tag}`)
@@ -37,9 +38,9 @@ module.exports = async (oldUser, newUser) => {
 
       if (!isSameDisplayAvatarURL) {
         builder
-          .setBody('Old avatar:')
+          .setBody("Old avatar:")
           .setImages([oldUser.displayAvatarURL()])
-          .setFooter('Changed avatar');
+          .setFooter("Changed avatar");
         await send(guild, builder);
       }
     });

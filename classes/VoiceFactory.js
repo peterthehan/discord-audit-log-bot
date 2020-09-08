@@ -1,8 +1,8 @@
 const {
-  colors: { positive, neutral, negative }
-} = require('../config');
-const AuditLogEmbedBuilder = require('./AuditLogEmbedBuilder');
-const Time = require('./Time');
+  colors: { positive, neutral, negative },
+} = require("../config");
+const AuditLogEmbedBuilder = require("./AuditLogEmbedBuilder");
+const Time = require("./Time");
 
 const voiceCache = {};
 
@@ -15,11 +15,11 @@ module.exports = class VoiceFactory {
   }
 
   _setElapsedTime(state) {
-    const key = `${['START', 'STOP'].includes(state) ? 'streaming' : 'voice'}${
+    const key = `${["START", "STOP"].includes(state) ? "streaming" : "voice"}${
       this.user.id
     }`;
 
-    if (['JOIN', 'START'].includes(state)) {
+    if (["JOIN", "START"].includes(state)) {
       this.elapsedTime = null;
       voiceCache[key] = Date.now();
       return;
@@ -30,7 +30,7 @@ module.exports = class VoiceFactory {
       delete voiceCache[key];
     }
 
-    if (state === 'CHANGE') {
+    if (state === "CHANGE") {
       voiceCache[key] = Date.now();
     }
   }
@@ -41,7 +41,7 @@ module.exports = class VoiceFactory {
     }
 
     const activity = this.user.presence.activities.find(
-      activity => activity.type !== 'CUSTOM_STATUS'
+      (activity) => activity.type !== "CUSTOM_STATUS"
     );
     if (!activity) {
       return channel;
@@ -59,42 +59,42 @@ module.exports = class VoiceFactory {
     const builder = new AuditLogEmbedBuilder().setUser(this.user);
 
     switch (state) {
-      case 'JOIN':
+      case "JOIN":
         return builder
           .setColor(positive)
           .setBody(this.newChannel)
-          .setFooter('Joined voice');
-      case 'LEAVE':
+          .setFooter("Joined voice");
+      case "LEAVE":
         return builder
           .setColor(negative)
           .setBody(this.oldChannel)
           .setFooter(
             this.elapsedTime
               ? `Left voice after ${this.elapsedTime}`
-              : 'Left voice'
+              : "Left voice"
           );
-      case 'CHANGE':
+      case "CHANGE":
         return builder
           .setColor(neutral)
           .setBody(`${this.oldChannel} ➡️ ${this.newChannel}`)
           .setFooter(
             this.elapsedTime
               ? `Changed voice after ${this.elapsedTime}`
-              : 'Changed voice'
+              : "Changed voice"
           );
-      case 'START':
+      case "START":
         return builder
           .setColor(positive)
           .setBody(this._getActivityDescription(this.newChannel))
-          .setFooter('Started streaming');
-      case 'STOP':
+          .setFooter("Started streaming");
+      case "STOP":
         return builder
           .setColor(negative)
           .setBody(this._getActivityDescription(this.oldChannel))
           .setFooter(
             this.elapsedTime
               ? `Stopped streaming after ${this.elapsedTime}`
-              : 'Stopped streaming'
+              : "Stopped streaming"
           );
     }
 

@@ -1,4 +1,4 @@
-const { guildChannelMap } = require('../config');
+const { guildChannelMap } = require("../config");
 
-module.exports = channel =>
+module.exports = (channel) =>
   !guildChannelMap[channel.guild.id].ignoreChannelIds.includes(channel.id);

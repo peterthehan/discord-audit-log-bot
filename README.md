@@ -25,25 +25,27 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 3. Open [config.js](https://github.com/peterthehan/discord-audit-log-bot/blob/master/config.js) to configure your own settings:
 
 ```js
-clientMap: { web: '🌐', mobile: '📱', desktop: '💻' },
-colors: {
-  base: 0x7289da,
-  positive: 0x3498db,
-  neutral: 0xe67e22,
-  negative: 0xe91e63
-},
-deleteTimeThreshold: 1,
-editTimeThreshold: 0,
-guildChannelMap: {
-  'GUILD_1_ID': {
-    logChannelId: 'TEXT_CHANNEL_1_ID',
-    ignoreChannelIds: ['TEXT_CHANNEL_2_ID']
+{
+  "clientMap": { "web": "🌐", "mobile": "📱", "desktop": "💻" },
+  "colors": {
+    "base": "7289da",
+    "positive": "3498db",
+    "neutral": "e67e22",
+    "negative": "e91e63"
   },
-  'GUILD_2_ID': {
-    logChannelId: 'TEXT_CHANNEL_3_ID',
-    ignoreChannelIds: ['TEXT_CHANNEL_4_ID']
-  },
-  // ...Add as many guild-channel mappings as you want.
+  "deleteTimeThreshold": 1,
+  "editTimeThreshold": 0,
+  "guildChannelMap": {
+    "GUILD_1_ID": {
+      "logChannelId": "TEXT_CHANNEL_1_ID",
+      "ignoreChannelIds": ["TEXT_CHANNEL_2_ID"]
+    },
+    "GUILD_2_ID": {
+      "logChannelId": "TEXT_CHANNEL_3_ID",
+      "ignoreChannelIds": ["TEXT_CHANNEL_4_ID"]
+    },
+    // ...Add as many guild-channel mappings as you want.
+  }
 }
 ```
 

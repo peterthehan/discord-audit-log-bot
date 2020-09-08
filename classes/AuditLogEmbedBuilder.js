@@ -1,4 +1,4 @@
-const { clientMap } = require('../config');
+const { clientMap } = require("../config");
 
 module.exports = class AuditLogEmbedBuilder {
   constructor() {
@@ -52,12 +52,14 @@ module.exports = class AuditLogEmbedBuilder {
   }
 
   _getDescription(index) {
-    if (!this.user) return null;
+    if (!this.user) {
+      return null;
+    }
 
     const title = [`${this.user} (${this.user.tag})`, this.channel]
       .filter(Boolean)
-      .join(' | ');
-    const link = this.link ? `[[link]](${this.link})` : '';
+      .join(" | ");
+    const link = this.link ? `[[link]](${this.link})` : "";
 
     return (index === 0
       ? `${title}\n${this.body} ${link}`
@@ -66,24 +68,28 @@ module.exports = class AuditLogEmbedBuilder {
   }
 
   _getImages() {
-    if (!this.images || !this.images.length) return [{}];
+    if (!this.images || !this.images.length) {
+      return [{}];
+    }
 
-    return this.images.map(url => ({ image: { url } }));
+    return this.images.map((url) => ({ image: { url } }));
   }
 
   _getFooter(index, length) {
-    if (!this.footer) return null;
+    if (!this.footer) {
+      return null;
+    }
 
-    const pages = length === 1 ? '' : `${index + 1} of ${length}`;
+    const pages = length === 1 ? "" : `${index + 1} of ${length}`;
     const clients = Object.keys(
       (this.user && this.user.presence.clientStatus) || {}
     )
-      .map(client => clientMap[client])
-      .join('');
+      .map((client) => clientMap[client])
+      .join("");
 
     return {
       icon_url: this.user && this.user.displayAvatarURL(),
-      text: [this.footer, pages, clients].filter(Boolean).join(' | ')
+      text: [this.footer, pages, clients].filter(Boolean).join(" | "),
     };
   }
 
@@ -97,7 +103,7 @@ module.exports = class AuditLogEmbedBuilder {
       description: this._getDescription(index),
       ...image,
       footer: this._getFooter(index, images.length),
-      timestamp: this._getTimestamp()
+      timestamp: this._getTimestamp(),
     }));
   }
 };

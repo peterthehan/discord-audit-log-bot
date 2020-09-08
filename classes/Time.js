@@ -10,7 +10,9 @@ module.exports = class Time {
   }
 
   getElapsedTime() {
-    if (!this.date) return -1;
+    if (!this.date) {
+      return -1;
+    }
 
     const elapsedTime = (Date.now() - this.date) / millisecondsInSecond;
 
@@ -19,20 +21,24 @@ module.exports = class Time {
 
   getHumanizedElapsedTime() {
     const seconds = this.getElapsedTime();
-    if (seconds < 0) return '?';
-    if (seconds < 60) return `${seconds}s`;
+    if (seconds < 0) {
+      return "?";
+    }
+    if (seconds < 60) {
+      return `${seconds}s`;
+    }
 
     return [
-      { time: seconds / secondsInYear, label: 'y' },
-      { time: (seconds % secondsInYear) / secondsInDay, label: 'd' },
-      { time: (seconds % secondsInDay) / secondsInHour, label: 'h' },
-      { time: (seconds % secondsInHour) / secondsInMinute, label: 'm' },
-      { time: seconds % secondsInMinute, label: 's' }
+      { time: seconds / secondsInYear, label: "y" },
+      { time: (seconds % secondsInYear) / secondsInDay, label: "d" },
+      { time: (seconds % secondsInDay) / secondsInHour, label: "h" },
+      { time: (seconds % secondsInHour) / secondsInMinute, label: "m" },
+      { time: seconds % secondsInMinute, label: "s" },
     ]
       .map(({ time, label }) => ({ time: Math.floor(time), label }))
       .filter(({ time }) => time)
       .map(({ time, label }) => `${time}${label}`)
-      .join('');
+      .join("");
   }
 
   _addLeadingZero(number) {
@@ -41,7 +47,7 @@ module.exports = class Time {
 
   toLocaleString() {
     if (!this.date) {
-      return '?';
+      return "?";
     }
 
     const year = this.date.getFullYear();
@@ -56,7 +62,7 @@ module.exports = class Time {
 
     const timezone = Intl.DateTimeFormat()
       .resolvedOptions()
-      .timeZone.replace(/_/g, ' ');
+      .timeZone.replace(/_/g, " ");
 
     return `${dateString} @ ${timeString} (${timezone})`;
   }

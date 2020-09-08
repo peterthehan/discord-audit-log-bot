@@ -1,0 +1,17 @@
+{
+  "clientMap": { "web": "🌐", "mobile": "📱", "desktop": "💻" },
+  "colors": {
+    "base": "7289da",
+    "positive": "3498db",
+    "neutral": "e67e22",
+    "negative": "e91e63"
+  },
+  "deleteTimeThreshold": 1,
+  "editTimeThreshold": 0,
+  "guildChannelMap": {
+    "258167954913361930": {
+      "logChannelId": "560648403709591552",
+      "ignoreChannelIds": ["649020657522180128"]
+    }
+  }
+}

@@ -1,3 +1,3 @@
-const { guildChannelMap } = require('../config');
+const { guildChannelMap } = require("../config");
 
-module.exports = guild => guild && guild.id in guildChannelMap;
+module.exports = (guild) => guild && guild.id in guildChannelMap;

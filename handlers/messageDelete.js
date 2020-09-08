@@ -1,21 +1,27 @@
 const {
   colors: { negative },
-  deleteTimeThreshold
-} = require('../config');
-const AuditLogEmbedBuilder = require('../classes/AuditLogEmbedBuilder');
-const Time = require('../classes/Time');
-const getImages = require('../util/getImages');
-const isLoggedChannel = require('../util/isLoggedChannel');
-const isLoggedGuild = require('../util/isLoggedGuild');
-const send = require('../util/send');
+  deleteTimeThreshold,
+} = require("../config");
+const AuditLogEmbedBuilder = require("../classes/AuditLogEmbedBuilder");
+const Time = require("../classes/Time");
+const getImages = require("../util/getImages");
+const isLoggedChannel = require("../util/isLoggedChannel");
+const isLoggedGuild = require("../util/isLoggedGuild");
+const send = require("../util/send");
 
 module.exports = async (message, isBulkDelete = false) => {
-  if (message.author && message.author.bot) return;
-  if (!isLoggedGuild(message.guild)) return;
-  if (!isLoggedChannel(message.channel)) return;
+  if (
+    (message.author && message.author.bot) ||
+    !isLoggedGuild(message.guild) ||
+    !isLoggedChannel(message.channel)
+  ) {
+    return;
+  }
 
   const time = new Time(message.createdTimestamp);
-  if (time.getElapsedTime() < deleteTimeThreshold) return;
+  if (time.getElapsedTime() < deleteTimeThreshold) {
+    return;
+  }
 
   const builder = new AuditLogEmbedBuilder()
     .setColor(negative)
