@@ -49,15 +49,17 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 }
 ```
 
-> `clientMap` denotes the active clients the user is connected to. This displays in the log embed's footer.
+- `clientMap` denotes the active clients the user is connected to. This displays in the log embed's footer.
 
-> `colors` are used to color code log embeds by the action taken.
+- `colors` are used to color code log embeds by the action taken.
 
-> Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
+- Message edits or deletions that occur in less time than the `editTimeThreshold` or `deleteTimeThreshold` (in seconds), respectively, will not be logged.
 
-> `logChannelId` is the channel the bot logs messages into.
+- `logChannelId` is the channel the bot logs messages into.
 
-> `ignoreChannelIds` tells the bot to not log messages from the listed channels (e.g. hidden admin-only channels, read-only information channels, etc).
+- `ignoreChannelIds` tells the bot to not log messages from the listed channels (e.g. hidden admin-only channels, read-only information channels, etc).
+
+4. `npm start` to run the bot.
 
 Visit for more help or information!
 
