@@ -22,7 +22,7 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
 
    > `npm i -s diff@^5.0.0` to install this widget's dependencies.
 
-3. Open [config.json](https://github.com/peterthehan/discord-audit-log-bot/blob/master/config.json) to configure your own settings:
+3. Open [config.json](https://github.com/peterthehan/discord-audit-log-bot/blob/master/src-discord-audit-log-bot/config.json) to configure your own settings:
 
    ```json
    {
