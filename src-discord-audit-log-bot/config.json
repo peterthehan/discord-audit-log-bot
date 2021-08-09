@@ -1,17 +1,13 @@
-{
-  "clientMap": { "web": "🌐", "mobile": "📱", "desktop": "💻" },
-  "colors": {
-    "base": "7289da",
-    "positive": "3498db",
-    "neutral": "e67e22",
-    "negative": "e91e63"
-  },
-  "deleteTimeThreshold": 1,
-  "editTimeThreshold": 0,
-  "guildChannelMap": {
-    "258167954913361930": {
-      "logChannelId": "560648403709591552",
-      "ignoreChannelIds": ["649020657522180128"]
-    }
+[
+  {
+    "defaultColor": "BLURPLE",
+    "positiveColor": "#3498DB",
+    "neutralColor": "#E67E22",
+    "negativeColor": "#E91E63",
+    "deleteTimeThreshold": 1,
+    "updateTimeThreshold": 0,
+    "guildId": "258167954913361930",
+    "logChannelId": "747319121582096434",
+    "ignoreChannelIds": ["649020657522180128"]
   }
-}
+]
