@@ -1,8 +1,12 @@
 import { diffLines, diffWordsWithSpace } from "diff";
 import { Util } from "discord.js";
 
+function reverse(string: string): string {
+  return [...string].reverse().join("");
+}
+
 function applyStyle(string: string, style: string): string {
-  return `${style}${string}${style}`;
+  return `${style}${string}${reverse(style)}`;
 }
 
 function getSmallestString(strings: string[]): string {
@@ -21,7 +25,7 @@ function getDiff(oldString: string, newString: string): string {
     diffFunction(oldString, newString).reduce((diffString, part) => {
       return (diffString += applyStyle(
         part.value,
-        part.added ? "***" : part.removed ? "~~" : ""
+        part.added ? "**_" : part.removed ? "~~" : ""
       ));
     }, "")
   );
