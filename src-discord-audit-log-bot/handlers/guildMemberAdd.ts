@@ -14,7 +14,7 @@ module.exports = async (member: GuildMember): Promise<void> => {
     new MessageEmbed()
       .setColor(config.positiveColor)
       .setDescription(
-        `${getTitle(member.user)}\nAccount created: ${getTimestampFormat(
+        `${getTitle(member.user)}\nCreated account: ${getTimestampFormat(
           member.user.createdAt
         )}`
       )
