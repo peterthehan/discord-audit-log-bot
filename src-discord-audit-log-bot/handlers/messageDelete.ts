@@ -30,7 +30,13 @@ module.exports = async (
       ? new MessageEmbed()
           .setColor(config.negativeColor)
           .setDescription(
-            `${getTitle(message.author, message.channel)}\n${message.content}`
+            [
+              getTitle(message.author, message.channel),
+              message.content,
+              message.stickers.map((sticker) => `<${sticker.name}>`).join(" "),
+            ]
+              .filter(Boolean)
+              .join("\n")
           )
           .setImage(imageUrl)
           .setURL(message.url)

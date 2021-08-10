@@ -35,10 +35,17 @@ module.exports = async (
       ? new MessageEmbed()
           .setColor(config.neutralColor)
           .setDescription(
-            `${getTitle(newMessage.author, newMessage.channel)}\n${getDiff(
-              oldMessage.content,
-              newMessage.content
-            )} [[link]](${newMessage.url})`
+            [
+              getTitle(newMessage.author, newMessage.channel),
+              `${getDiff(oldMessage.content, newMessage.content)} [[link]](${
+                newMessage.url
+              })`,
+              newMessage.stickers
+                .map((sticker) => `<${sticker.name}>`)
+                .join(" "),
+            ]
+              .filter(Boolean)
+              .join("\n")
           )
           .setImage(imageUrl)
           .setURL(newMessage.url)
