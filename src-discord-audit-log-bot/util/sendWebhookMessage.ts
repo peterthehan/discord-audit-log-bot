@@ -11,7 +11,7 @@ async function sendWebhookMessage(
   )) as TextChannel;
   const webhooks = await channel.fetchWebhooks();
   const webhook = !webhooks.size
-    ? await channel.createWebhook("")
+    ? await channel.createWebhook(guild.client.user?.username || "📢")
     : (webhooks.first() as Webhook);
 
   webhook.send(options);
