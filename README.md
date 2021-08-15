@@ -31,7 +31,7 @@ A Discord bot that fills in the gaps in Discord's Audit Log.
        "deleteTimeThreshold": 1,
        "updateTimeThreshold": 0,
        "guildId": "258167954913361930",
-       "logChannelId": "747319121582096434",
+       "logChannelId": "560648403709591552",
        "ignoreChannelIds": ["649020657522180128"]
      }
    ]
