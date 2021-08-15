@@ -53,7 +53,7 @@ module.exports = async (
             `Updated message in ${humanizeChannelType(
               newMessage.channel
             )} after ${humanizeElapsedTime(elapsedTime)}`,
-            newMessage.author.displayAvatarURL()
+            newMessage.author.displayAvatarURL({ dynamic: true })
           )
           .setTimestamp()
       : new MessageEmbed().setImage(imageUrl).setURL(newMessage.url);

@@ -18,7 +18,10 @@ module.exports = async (member: GuildMember): Promise<void> => {
           member.user.createdAt
         )}`
       )
-      .setFooter("Joined the server", member.user.displayAvatarURL())
+      .setFooter(
+        "Joined the server",
+        member.user.displayAvatarURL({ dynamic: true })
+      )
       .setTimestamp(),
   ];
 

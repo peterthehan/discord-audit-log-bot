@@ -9,8 +9,8 @@ module.exports = async (oldUser: User, newUser: User): Promise<void> => {
     return;
   }
 
-  const oldAvatarUrl = oldUser.displayAvatarURL();
-  const newAvatarUrl = newUser.displayAvatarURL();
+  const oldAvatarUrl = oldUser.displayAvatarURL({ dynamic: true });
+  const newAvatarUrl = newUser.displayAvatarURL({ dynamic: true });
 
   const hasNewTag = oldUser.tag !== newUser.tag;
   const hasNewDisplayAvatarUrl = oldAvatarUrl !== newAvatarUrl;
