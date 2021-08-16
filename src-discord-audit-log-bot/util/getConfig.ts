@@ -1,8 +1,8 @@
-import { Guild } from "discord.js";
+import { Guild, Snowflake } from "discord.js";
 import configs from "../config.json";
 import { Config } from "../types";
 
-const configMap: Map<string, Config> = new Map();
+const configMap: Map<Snowflake, Config> = new Map();
 configs.forEach((config) => {
   const newConfig = {
     ...config,

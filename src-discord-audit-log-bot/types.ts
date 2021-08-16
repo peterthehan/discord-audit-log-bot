@@ -1,4 +1,4 @@
-import { ColorResolvable } from "discord.js";
+import { ColorResolvable, Snowflake } from "discord.js";
 
 export interface Config {
   defaultColor: ColorResolvable;
@@ -7,7 +7,7 @@ export interface Config {
   negativeColor: ColorResolvable;
   deleteTimeThreshold: number;
   updateTimeThreshold: number;
-  guildId: string;
-  logChannelId: string;
-  ignoreChannelIds: Set<string>;
+  guildId: Snowflake;
+  logChannelId: Snowflake;
+  ignoreChannelIds: Set<Snowflake>;
 }
