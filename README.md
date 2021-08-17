@@ -2,7 +2,7 @@
 
 [![Discord](https://discord.com/api/guilds/258167954913361930/embed.png)](https://discord.gg/WjEFnzC) [![Twitter Follow](https://img.shields.io/twitter/follow/peterthehan.svg?style=social)](https://twitter.com/peterthehan)
 
-A Discord bot that fills in the gaps in Discord's Audit Log.
+A Discord bot that extends Discord's native Audit Log.
 
 |                                                                              |                                                                                                     |
 | :--------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: |
