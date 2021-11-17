@@ -19,7 +19,7 @@ A Discord bot that extends Discord's native Audit Log.
 
 2. Download this bot and move the `src-discord-audit-log-bot` folder into the [/src/bots](https://github.com/peterthehan/create-discord-bot/tree/master/src/bots) folder from step 1.
 
-   > Run `npm i diff@^5.0.0` to install this bot's dependencies.
+   > Run `npm i diff@^5.0.0` and `npm i -D @types/diff@^5.0.1` to install this bot's dependencies.
 
 3. Open [config.json](./src-discord-audit-log-bot/config.json) to configure your own settings:
 
